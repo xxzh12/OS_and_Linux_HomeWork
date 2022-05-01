@@ -19,10 +19,15 @@ int main(int argc, char *argv[])
 	struct sockaddr_in servaddr;
 	char buf[MAXLINE];
 	int sockfd, n, writenBytes;
-	char *str, *IPstr;
+	char *IPstr;
+	char str[50];
 	unsigned int account;
 	struct clientdata datapack;
 	struct clientdata *dataptr;
+	int key;
+
+	//个人用户名赋值
+	char UserName[5] = "Chaos";
 
 	//读取参数
 	if (argc < 2) {
@@ -31,7 +36,7 @@ int main(int argc, char *argv[])
 	}
 	IPstr = argv[3];
 	account = (unsigned int)atoi(argv[2]);
-	str = argv[1];
+	//str = argv[1];
     
 	sockfd = socket(AF_INET, SOCK_STREAM, 0);
 
@@ -40,7 +45,7 @@ int main(int argc, char *argv[])
 	inet_pton(AF_INET, IPstr, &servaddr.sin_addr);
 	servaddr.sin_port = htons(SERV_PORT);
     
-	//建立链接
+	//与服务器建立链接
 	int re = connect(sockfd, (struct sockaddr *)&servaddr, sizeof(servaddr));
 	if (re == -1){
 		printf("Connection Failed\n");
@@ -48,35 +53,62 @@ int main(int argc, char *argv[])
 	}
 	else
 		printf("Successfully Connected\n");
-	
-	//信息包编码
-	char* data = encode(str, SEND, account, TEXT, strlen(str));
-	printf("%02x %dasd\n", *(data), strlen(str));
-	int i = 0;
-	for (i=0;i++;i<strlen(str)+8){
-		printf("data %02x\n", *(data+i));
-	}
 
-	//添加并发送登录信号
-	char* login = encode(str, LOGIN, account, TEXT, strlen(str));
-	writenBytes = write(sockfd, login, strlen(str)+8);
-	printf("%d bytes have been writen\n",writenBytes);	
-
-	//发送信息
-	int writeTimes = 0;
-	int times = 3;
+	//等待登录请求
+	printf("waiting for LOGIN signal-tab");
 	while(1){
-		printf("The %ds writing~\n",writeTimes);
-		sleep(1);
-		writeTimes++;
-		printf("seeing~\n");
-		writenBytes = write(sockfd, data, strlen(str)+8);
-		printf("%d bytes have been writen\n",writenBytes);	
-		n = read(sockfd, buf, MAXLINE);
-		printf("Response from server:\n");
-		write(STDOUT_FILENO, buf, n);
-		printf("\n");
+		key = scanKeyboard();
+		if (key == KEY_LOGIN)
+			break;
 	}
+	//添加登录信号
+	char* login = encode(UserName, LOGIN, account, TEXT, strlen(UserName));
+	//
+	while(1){
+		switch(key){
+			case KEY_LOGIN:
+				//添加并发送登录信号
+				writenBytes = write(sockfd, login, strlen(UserName)+8);
+				printf("%d bytes have been writen for login\n",writenBytes);
+				key = KEY_INPUT;
+
+			case KEY_INPUT:
+				printf("Please input your message, but no bigger that 50 letters!\n");
+				scanf("%[^\n]", str);
+				printf("23456\n");
+				//信息包编码
+				char* data = encode(str, SEND, account, TEXT, strlen(str));
+				printf("%02x %dasd\n", *(data), strlen(str));
+				//发送信息
+				int writeTimes = 0;
+				int times = 3;
+				while(times--){
+					printf("The %ds writing~\n",writeTimes);
+					sleep(1);
+					writeTimes++;
+					printf("seeing~\n");
+					writenBytes = write(sockfd, data, strlen(str)+8);
+					printf("%d bytes have been writen\n",writenBytes);	
+					n = read(sockfd, buf, MAXLINE);
+					printf("Response from server:\n");
+					write(STDOUT_FILENO, buf, n);
+					printf("\n");
+				}
+
+			case KEY_LOGOUT:
+				break;
+
+			default:
+				printf("error");
+				break;
+
+		}
+	}
+
+	
+	
+
+	while(1);
 
 	//发送结束信息
 	str[0]='e';str[1]='n';str[2]='d';str[3]='\0';

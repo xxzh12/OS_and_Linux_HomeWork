@@ -24,6 +24,7 @@ char* encode(char* msg, unsigned int protocolId, unsigned int account, unsigned 
     datahead = encodeElement(datahead, account, ACCOUNT_SIZE);
     datahead = encodeElement(datahead, dataType, DATA_TYPE_SIZE);
     datahead = encodeElement(datahead, dataLength, DATA_SIZE);
+    printf("data packed\n");
     strcpy(datahead, msg);
     return data;
 }
