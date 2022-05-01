@@ -9,6 +9,7 @@
 #include <arpa/inet.h>
 #include <assert.h>
 #include <time.h>
+#include "client.h"
 
 #define MAXLINE 80
 #define SERV_PORT 8888
@@ -18,13 +19,18 @@ int main(int argc, char *argv[])
 	struct sockaddr_in servaddr;
 	char buf[MAXLINE];
 	int sockfd, n, writenBytes;
-	char *str;
-	char *IPstr;
+	char *str, *IPstr;
+	unsigned int account;
+	struct clientdata datapack;
+	struct clientdata *dataptr;
+
+	//读取参数
 	if (argc < 2) {
 		fputs("usage: ./client message\n", stderr);
 		exit(1);
 	}
-	IPstr = argv[2];
+	IPstr = argv[3];
+	account = (unsigned int)atoi(argv[2]);
 	str = argv[1];
     
 	sockfd = socket(AF_INET, SOCK_STREAM, 0);
@@ -34,28 +40,40 @@ int main(int argc, char *argv[])
 	inet_pton(AF_INET, IPstr, &servaddr.sin_addr);
 	servaddr.sin_port = htons(SERV_PORT);
     
+	//建立链接
 	int re = connect(sockfd, (struct sockaddr *)&servaddr, sizeof(servaddr));
 	if (re == -1){
 		printf("Connection Failed\n");
-		exit(1);
+		//exit(1);
 	}
-	puts("Successfully Connected");
+	else
+		printf("Successfully Connected\n");
 	
+	//信息包编码
+	char* data = encode(str, SEND, account, TEXT, sizeof(str));
+	printf("%02x %dasd\n", *(data), strlen(str));
+	int i = 0;
+	for (i=0;i++;i<strlen(str)+8){
+		printf("data %02x\n", *(data+i));
+	}
+
+	//发送信息
 	int writeTimes = 0;
 	int times = 3;
-/*	while(times--)
-	{
+	while(1){
 		printf("The %ds writing~\n",writeTimes);
 		sleep(1);
 		writeTimes++;
 		printf("seeing~\n");
-		writenBytes = write(sockfd, str, strlen(str));
-		
+		writenBytes = write(sockfd, data, strlen(str)+8);
+		printf("%d bytes have been writen\n",writenBytes);	
 		//n = read(sockfd, buf, MAXLINE);
-		puts("Response from server:\n");
+		printf("Response from server:\n");
 		//write(STDOUT_FILENO, buf, n);
 		printf("\n");
-	}*/
+	}
+
+	//发送结束信息
 	str[0]='e';str[1]='n';str[2]='d';str[3]='\0';
 	printf("Transferring the signal of %s\n",str);
 	write(sockfd, str, strlen(str));
