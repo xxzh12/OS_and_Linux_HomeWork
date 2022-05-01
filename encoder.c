@@ -4,6 +4,7 @@
 #include <unistd.h>
 #include "encoder.h"
 
+//编码数据头中的元素信息
 char* encodeElement(char* datahead, unsigned int data, unsigned int len){
     char* c = datahead + len - 1;
     for(int i = len;i>0;i--){
@@ -15,6 +16,7 @@ char* encodeElement(char* datahead, unsigned int data, unsigned int len){
     return datahead;
 }
 
+//编码数据包
 char* encode(char* msg, unsigned int protocolId, unsigned int account, unsigned int dataType, unsigned int dataLength) {
     char* data = malloc(sizeof(msg)+8);
     char* datahead = data;
@@ -23,7 +25,6 @@ char* encode(char* msg, unsigned int protocolId, unsigned int account, unsigned 
     datahead = encodeElement(datahead, dataType, DATA_TYPE_SIZE);
     datahead = encodeElement(datahead, dataLength, DATA_SIZE);
     strcpy(datahead, msg);
-    printf("%s\n",data);
     return data;
 }
 

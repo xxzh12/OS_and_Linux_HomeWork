@@ -50,12 +50,17 @@ int main(int argc, char *argv[])
 		printf("Successfully Connected\n");
 	
 	//信息包编码
-	char* data = encode(str, SEND, account, TEXT, sizeof(str));
+	char* data = encode(str, SEND, account, TEXT, strlen(str));
 	printf("%02x %dasd\n", *(data), strlen(str));
 	int i = 0;
 	for (i=0;i++;i<strlen(str)+8){
 		printf("data %02x\n", *(data+i));
 	}
+
+	//添加并发送登录信号
+	char* login = encode(str, LOGIN, account, TEXT, strlen(str));
+	writenBytes = write(sockfd, login, strlen(str)+8);
+	printf("%d bytes have been writen\n",writenBytes);	
 
 	//发送信息
 	int writeTimes = 0;
@@ -67,9 +72,9 @@ int main(int argc, char *argv[])
 		printf("seeing~\n");
 		writenBytes = write(sockfd, data, strlen(str)+8);
 		printf("%d bytes have been writen\n",writenBytes);	
-		//n = read(sockfd, buf, MAXLINE);
+		n = read(sockfd, buf, MAXLINE);
 		printf("Response from server:\n");
-		//write(STDOUT_FILENO, buf, n);
+		write(STDOUT_FILENO, buf, n);
 		printf("\n");
 	}
 
