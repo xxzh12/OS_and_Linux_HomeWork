@@ -18,7 +18,6 @@
 #include <QtWidgets/QHBoxLayout>
 #include <QtWidgets/QHeaderView>
 #include <QtWidgets/QLabel>
-#include <QtWidgets/QLineEdit>
 #include <QtWidgets/QMainWindow>
 #include <QtWidgets/QMenu>
 #include <QtWidgets/QMenuBar>
@@ -27,6 +26,7 @@
 #include <QtWidgets/QStatusBar>
 #include <QtWidgets/QTableWidget>
 #include <QtWidgets/QTextBrowser>
+#include <QtWidgets/QTextEdit>
 #include <QtWidgets/QToolButton>
 #include <QtWidgets/QVBoxLayout>
 #include <QtWidgets/QWidget>
@@ -52,7 +52,7 @@ public:
     QToolButton *underlineTBtn;
     QToolButton *clearTBtn;
     QToolButton *colorTBtn;
-    QLineEdit *lineEdit;
+    QTextEdit *msgTextEdit;
     QHBoxLayout *horizontalLayout_2;
     QPushButton *pushButton;
     QLabel *label;
@@ -143,11 +143,10 @@ public:
 
         verticalLayout_2->addLayout(verticalLayout);
 
-        lineEdit = new QLineEdit(widget);
-        lineEdit->setObjectName(QString::fromUtf8("lineEdit"));
-        lineEdit->setEnabled(true);
+        msgTextEdit = new QTextEdit(widget);
+        msgTextEdit->setObjectName(QString::fromUtf8("msgTextEdit"));
 
-        verticalLayout_2->addWidget(lineEdit);
+        verticalLayout_2->addWidget(msgTextEdit);
 
 
         verticalLayout_3->addLayout(verticalLayout_2);

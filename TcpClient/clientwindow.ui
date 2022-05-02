@@ -146,11 +146,7 @@
          </layout>
         </item>
         <item>
-         <widget class="QLineEdit" name="lineEdit">
-          <property name="enabled">
-           <bool>true</bool>
-          </property>
-         </widget>
+         <widget class="QTextEdit" name="msgTextEdit"/>
         </item>
        </layout>
       </item>

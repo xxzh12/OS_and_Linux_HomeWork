@@ -20,12 +20,12 @@ ClientWindow::ClientWindow(QWidget *parent) :
     connectToServer();
     // do other things
     connect(ui->fontCbx,&QFontComboBox::currentFontChanged,[=](const QFont &font){
-        ui->lineEdit->setFontFamily(font.toString());
-        ui->lineEdit->setFocus();
+        ui->msgTextEdit->setFontFamily(font.toString());
+        ui->msgTextEdit->setFocus();
     });
     void (QComboBox:: * sizebtn)(const QString &text)=&QComboBox::currentTextChanged;
     connect(ui->sizeCbx,sizebtn,[=](const QString &text){
-        ui->lineEdit->setFontPointSize(text.toDouble());
+        ui->msgTextEdit->setFontPointSize(text.toDouble());
     });
 }
 
@@ -55,11 +55,11 @@ void ClientWindow::slot_readMessage()   // 只会在socket接收到server消息�
 
 void ClientWindow::slot_btnSendMsg()
 {
-    QString str = ui->lineEdit->text();
+    QString str = ui->msgTextEdit->toHtml();
 
     m_socket->write(str.toStdString().data());    // Exception
 
-    ui->lineEdit->clear();
+    ui->msgTextEdit->clear();
 }
 
 ClientWindow::~ClientWindow()
