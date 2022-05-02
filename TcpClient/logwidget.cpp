@@ -8,7 +8,7 @@ LogWidget::LogWidget(QWidget *parent) :
 {
     ui->setupUi(this);
     setWindowTitle("聊天室登录");
-    this->setWindowIcon(QIcon("./Images/Naruto"));
+    this->setWindowIcon(QIcon("./Images/Chats.png"));
     //form_init();
     func_init();
 }

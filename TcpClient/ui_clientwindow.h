@@ -28,7 +28,6 @@
 #include <QtWidgets/QTextBrowser>
 #include <QtWidgets/QTextEdit>
 #include <QtWidgets/QToolButton>
-#include <QtWidgets/QVBoxLayout>
 #include <QtWidgets/QWidget>
 
 QT_BEGIN_NAMESPACE
@@ -37,12 +36,7 @@ class Ui_ClientWindow
 {
 public:
     QWidget *centralwidget;
-    QSplitter *splitter;
-    QWidget *widget;
-    QVBoxLayout *verticalLayout_3;
-    QVBoxLayout *verticalLayout_2;
-    QTextBrowser *textBrowser;
-    QVBoxLayout *verticalLayout;
+    QTableWidget *tableWidget;
     QFrame *frame;
     QHBoxLayout *horizontalLayout;
     QFontComboBox *fontCbx;
@@ -50,14 +44,16 @@ public:
     QToolButton *boldTBtn;
     QToolButton *italicTbtn;
     QToolButton *underlineTBtn;
-    QToolButton *clearTBtn;
     QToolButton *colorTBtn;
+    QToolButton *clearTBtn;
     QTextEdit *msgTextEdit;
+    QSplitter *splitter;
+    QTextBrowser *textBrowser;
+    QWidget *widget;
     QHBoxLayout *horizontalLayout_2;
     QPushButton *pushButton;
     QLabel *label;
     QPushButton *exitButton;
-    QTableWidget *tableWidget;
     QMenuBar *menubar;
     QMenu *menuClient;
     QStatusBar *statusbar;
@@ -66,29 +62,19 @@ public:
     {
         if (ClientWindow->objectName().isEmpty())
             ClientWindow->setObjectName(QString::fromUtf8("ClientWindow"));
-        ClientWindow->resize(971, 485);
+        ClientWindow->resize(761, 544);
         centralwidget = new QWidget(ClientWindow);
         centralwidget->setObjectName(QString::fromUtf8("centralwidget"));
-        splitter = new QSplitter(centralwidget);
-        splitter->setObjectName(QString::fromUtf8("splitter"));
-        splitter->setGeometry(QRect(70, 80, 762, 313));
-        splitter->setOrientation(Qt::Horizontal);
-        widget = new QWidget(splitter);
-        widget->setObjectName(QString::fromUtf8("widget"));
-        verticalLayout_3 = new QVBoxLayout(widget);
-        verticalLayout_3->setObjectName(QString::fromUtf8("verticalLayout_3"));
-        verticalLayout_3->setContentsMargins(0, 0, 0, 0);
-        verticalLayout_2 = new QVBoxLayout();
-        verticalLayout_2->setObjectName(QString::fromUtf8("verticalLayout_2"));
-        textBrowser = new QTextBrowser(widget);
-        textBrowser->setObjectName(QString::fromUtf8("textBrowser"));
-
-        verticalLayout_2->addWidget(textBrowser);
-
-        verticalLayout = new QVBoxLayout();
-        verticalLayout->setObjectName(QString::fromUtf8("verticalLayout"));
-        frame = new QFrame(widget);
+        tableWidget = new QTableWidget(centralwidget);
+        if (tableWidget->columnCount() < 1)
+            tableWidget->setColumnCount(1);
+        QTableWidgetItem *__qtablewidgetitem = new QTableWidgetItem();
+        tableWidget->setHorizontalHeaderItem(0, __qtablewidgetitem);
+        tableWidget->setObjectName(QString::fromUtf8("tableWidget"));
+        tableWidget->setGeometry(QRect(620, 0, 120, 450));
+        frame = new QFrame(centralwidget);
         frame->setObjectName(QString::fromUtf8("frame"));
+        frame->setGeometry(QRect(20, 300, 600, 50));
         frame->setFrameShape(QFrame::Box);
         horizontalLayout = new QHBoxLayout(frame);
         horizontalLayout->setObjectName(QString::fromUtf8("horizontalLayout"));
@@ -98,6 +84,11 @@ public:
         horizontalLayout->addWidget(fontCbx);
 
         sizeCbx = new QComboBox(frame);
+        sizeCbx->addItem(QString());
+        sizeCbx->addItem(QString());
+        sizeCbx->addItem(QString());
+        sizeCbx->addItem(QString());
+        sizeCbx->addItem(QString());
         sizeCbx->addItem(QString());
         sizeCbx->addItem(QString());
         sizeCbx->addItem(QString());
@@ -126,33 +117,34 @@ public:
 
         horizontalLayout->addWidget(underlineTBtn);
 
-        clearTBtn = new QToolButton(frame);
-        clearTBtn->setObjectName(QString::fromUtf8("clearTBtn"));
-
-        horizontalLayout->addWidget(clearTBtn);
-
         colorTBtn = new QToolButton(frame);
         colorTBtn->setObjectName(QString::fromUtf8("colorTBtn"));
         colorTBtn->setCheckable(true);
 
         horizontalLayout->addWidget(colorTBtn);
 
+        clearTBtn = new QToolButton(frame);
+        clearTBtn->setObjectName(QString::fromUtf8("clearTBtn"));
 
-        verticalLayout->addWidget(frame);
+        horizontalLayout->addWidget(clearTBtn);
 
-
-        verticalLayout_2->addLayout(verticalLayout);
-
-        msgTextEdit = new QTextEdit(widget);
+        msgTextEdit = new QTextEdit(centralwidget);
         msgTextEdit->setObjectName(QString::fromUtf8("msgTextEdit"));
-
-        verticalLayout_2->addWidget(msgTextEdit);
-
-
-        verticalLayout_3->addLayout(verticalLayout_2);
-
-        horizontalLayout_2 = new QHBoxLayout();
+        msgTextEdit->setGeometry(QRect(20, 350, 600, 100));
+        splitter = new QSplitter(centralwidget);
+        splitter->setObjectName(QString::fromUtf8("splitter"));
+        splitter->setGeometry(QRect(20, 0, 600, 300));
+        splitter->setOrientation(Qt::Horizontal);
+        textBrowser = new QTextBrowser(splitter);
+        textBrowser->setObjectName(QString::fromUtf8("textBrowser"));
+        splitter->addWidget(textBrowser);
+        widget = new QWidget(centralwidget);
+        widget->setObjectName(QString::fromUtf8("widget"));
+        widget->setGeometry(QRect(20, 460, 602, 30));
+        horizontalLayout_2 = new QHBoxLayout(widget);
+        horizontalLayout_2->setSpacing(81);
         horizontalLayout_2->setObjectName(QString::fromUtf8("horizontalLayout_2"));
+        horizontalLayout_2->setContentsMargins(81, 0, 81, 0);
         pushButton = new QPushButton(widget);
         pushButton->setObjectName(QString::fromUtf8("pushButton"));
 
@@ -168,21 +160,10 @@ public:
 
         horizontalLayout_2->addWidget(exitButton);
 
-
-        verticalLayout_3->addLayout(horizontalLayout_2);
-
-        splitter->addWidget(widget);
-        tableWidget = new QTableWidget(splitter);
-        if (tableWidget->columnCount() < 1)
-            tableWidget->setColumnCount(1);
-        QTableWidgetItem *__qtablewidgetitem = new QTableWidgetItem();
-        tableWidget->setHorizontalHeaderItem(0, __qtablewidgetitem);
-        tableWidget->setObjectName(QString::fromUtf8("tableWidget"));
-        splitter->addWidget(tableWidget);
         ClientWindow->setCentralWidget(centralwidget);
         menubar = new QMenuBar(ClientWindow);
         menubar->setObjectName(QString::fromUtf8("menubar"));
-        menubar->setGeometry(QRect(0, 0, 971, 28));
+        menubar->setGeometry(QRect(0, 0, 761, 28));
         menuClient = new QMenu(menubar);
         menuClient->setObjectName(QString::fromUtf8("menuClient"));
         ClientWindow->setMenuBar(menubar);
@@ -200,12 +181,19 @@ public:
     void retranslateUi(QMainWindow *ClientWindow)
     {
         ClientWindow->setWindowTitle(QCoreApplication::translate("ClientWindow", "MainWindow", nullptr));
+        QTableWidgetItem *___qtablewidgetitem = tableWidget->horizontalHeaderItem(0);
+        ___qtablewidgetitem->setText(QCoreApplication::translate("ClientWindow", "Username:", nullptr));
         sizeCbx->setItemText(0, QCoreApplication::translate("ClientWindow", "5", nullptr));
         sizeCbx->setItemText(1, QCoreApplication::translate("ClientWindow", "6", nullptr));
         sizeCbx->setItemText(2, QCoreApplication::translate("ClientWindow", "7", nullptr));
         sizeCbx->setItemText(3, QCoreApplication::translate("ClientWindow", "8", nullptr));
         sizeCbx->setItemText(4, QCoreApplication::translate("ClientWindow", "9", nullptr));
         sizeCbx->setItemText(5, QCoreApplication::translate("ClientWindow", "10", nullptr));
+        sizeCbx->setItemText(6, QCoreApplication::translate("ClientWindow", "11", nullptr));
+        sizeCbx->setItemText(7, QCoreApplication::translate("ClientWindow", "12", nullptr));
+        sizeCbx->setItemText(8, QCoreApplication::translate("ClientWindow", "13", nullptr));
+        sizeCbx->setItemText(9, QCoreApplication::translate("ClientWindow", "14", nullptr));
+        sizeCbx->setItemText(10, QCoreApplication::translate("ClientWindow", "15", nullptr));
 
 #if QT_CONFIG(tooltip)
         boldTBtn->setToolTip(QCoreApplication::translate("ClientWindow", "Bold", nullptr));
@@ -220,18 +208,16 @@ public:
 #endif // QT_CONFIG(tooltip)
         underlineTBtn->setText(QCoreApplication::translate("ClientWindow", "U", nullptr));
 #if QT_CONFIG(tooltip)
-        clearTBtn->setToolTip(QCoreApplication::translate("ClientWindow", "Clear", nullptr));
-#endif // QT_CONFIG(tooltip)
-        clearTBtn->setText(QCoreApplication::translate("ClientWindow", "C", nullptr));
-#if QT_CONFIG(tooltip)
         colorTBtn->setToolTip(QCoreApplication::translate("ClientWindow", "Colour", nullptr));
 #endif // QT_CONFIG(tooltip)
         colorTBtn->setText(QCoreApplication::translate("ClientWindow", "Col", nullptr));
+#if QT_CONFIG(tooltip)
+        clearTBtn->setToolTip(QCoreApplication::translate("ClientWindow", "Clear", nullptr));
+#endif // QT_CONFIG(tooltip)
+        clearTBtn->setText(QCoreApplication::translate("ClientWindow", "C", nullptr));
         pushButton->setText(QCoreApplication::translate("ClientWindow", "send", nullptr));
         label->setText(QCoreApplication::translate("ClientWindow", " Member Online:", nullptr));
         exitButton->setText(QCoreApplication::translate("ClientWindow", "exit", nullptr));
-        QTableWidgetItem *___qtablewidgetitem = tableWidget->horizontalHeaderItem(0);
-        ___qtablewidgetitem->setText(QCoreApplication::translate("ClientWindow", "Username:", nullptr));
         menuClient->setTitle(QCoreApplication::translate("ClientWindow", "Client", nullptr));
     } // retranslateUi
 

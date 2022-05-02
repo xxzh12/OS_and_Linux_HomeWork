@@ -3,6 +3,14 @@
 
 #include "clientwindow.h"
 #include "ui_clientwindow.h"
+#include <QFont>
+#include <QColorDialog>
+#include <QMessageBox>
+#include <QDebug>
+#include <QString>
+#include <QDataStream>
+#include <QTextStream>
+
 
 ClientWindow::ClientWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -14,7 +22,7 @@ ClientWindow::ClientWindow(QWidget *parent) :
     // 注意，这个信号槽的作用就是激活主窗口的，我们已经让主窗口不可以自动打开，
     // 必须通过登录窗口中登录按钮发出的信号槽的信号才能打开
     setAttribute(Qt::WA_DeleteOnClose);//设置关闭窗口是自动释放内存
-    this->setStyleSheet(QString("background-color:#FFFFFF;"));//设置背景颜色为白色。和标题栏颜色一致。
+    //this->setStyleSheet(QString("background-color:#FFFFF;"));//设置背景颜色为白色。和标题栏颜色一致。
     setWindowTitle("Qt简易聊天室");
     connect(m_log,SIGNAL(login()),this,SLOT(show()));
     connectToServer();
@@ -26,6 +34,34 @@ ClientWindow::ClientWindow(QWidget *parent) :
     void (QComboBox:: * sizebtn)(const QString &text)=&QComboBox::currentTextChanged;
     connect(ui->sizeCbx,sizebtn,[=](const QString &text){
         ui->msgTextEdit->setFontPointSize(text.toDouble());
+        ui->msgTextEdit->setFocus();
+    });
+    connect(ui->boldTBtn,&QToolButton::clicked,[=](bool checked){
+        if(checked)
+        {
+            ui->msgTextEdit->setFontWeight(QFont::Bold);
+        }
+        else{
+            ui->msgTextEdit->setFontWeight(QFont::Normal);
+        }
+    });
+    connect(ui->italicTbtn,&QToolButton::clicked,[=](bool checked){
+        ui->msgTextEdit->setFontItalic(checked);
+        ui->msgTextEdit->setFocus();
+    });
+    connect(ui->underlineTBtn,&QToolButton::clicked,[=](bool checked){
+        ui->msgTextEdit->setFontUnderline(checked);
+        ui->msgTextEdit->setFocus();
+    });
+    connect(ui->clearTBtn,&QToolButton::clicked,[=](){
+        ui->textBrowser->clear();
+    });
+    connect(ui->colorTBtn,&QToolButton::clicked,[=](){
+        QColor color=QColorDialog::getColor(color,this);
+        ui->msgTextEdit->setTextColor(color);
+    });
+    connect(ui->exitButton,&QPushButton::clicked,[=](){
+        this->close();
     });
 }
 
@@ -50,7 +86,7 @@ void ClientWindow::slot_readMessage()   // 只会在socket接收到server消息�
     QString str = m_socket->readAll().data();
 
 
-    ui->textBrowser->setText(ui->textBrowser->toPlainText() + "\n" + str);
+    ui->textBrowser->setText(ui->textBrowser->toHtml() + "\n" + str);
 }
 
 void ClientWindow::slot_btnSendMsg()

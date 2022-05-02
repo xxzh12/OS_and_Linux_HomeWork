@@ -38,22 +38,22 @@ public:
     {
         if (LogWidget->objectName().isEmpty())
             LogWidget->setObjectName(QString::fromUtf8("LogWidget"));
-        LogWidget->resize(799, 275);
+        LogWidget->resize(381, 275);
         btn_clear = new QPushButton(LogWidget);
         btn_clear->setObjectName(QString::fromUtf8("btn_clear"));
-        btn_clear->setGeometry(QRect(240, 230, 89, 25));
+        btn_clear->setGeometry(QRect(20, 230, 89, 25));
         btn_log = new QPushButton(LogWidget);
         btn_log->setObjectName(QString::fromUtf8("btn_log"));
-        btn_log->setGeometry(QRect(490, 230, 89, 25));
+        btn_log->setGeometry(QRect(270, 230, 89, 25));
         check_pw = new QCheckBox(LogWidget);
         check_pw->setObjectName(QString::fromUtf8("check_pw"));
-        check_pw->setGeometry(QRect(240, 200, 151, 23));
+        check_pw->setGeometry(QRect(20, 200, 151, 23));
         check_name = new QCheckBox(LogWidget);
         check_name->setObjectName(QString::fromUtf8("check_name"));
-        check_name->setGeometry(QRect(450, 200, 151, 23));
+        check_name->setGeometry(QRect(230, 200, 151, 23));
         groupBox = new QGroupBox(LogWidget);
         groupBox->setObjectName(QString::fromUtf8("groupBox"));
-        groupBox->setGeometry(QRect(240, 30, 341, 151));
+        groupBox->setGeometry(QRect(20, 30, 341, 151));
         edit_name = new QLineEdit(groupBox);
         edit_name->setObjectName(QString::fromUtf8("edit_name"));
         edit_name->setGeometry(QRect(80, 30, 251, 25));
@@ -68,7 +68,7 @@ public:
         label_pw->setGeometry(QRect(0, 80, 67, 17));
         label_title = new QLabel(LogWidget);
         label_title->setObjectName(QString::fromUtf8("label_title"));
-        label_title->setGeometry(QRect(370, 0, 81, 17));
+        label_title->setGeometry(QRect(150, 0, 81, 17));
 
         retranslateUi(LogWidget);
 

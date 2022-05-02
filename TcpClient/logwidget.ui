@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>799</width>
+    <width>381</width>
     <height>275</height>
    </rect>
   </property>
@@ -16,7 +16,7 @@
   <widget class="QPushButton" name="btn_clear">
    <property name="geometry">
     <rect>
-     <x>240</x>
+     <x>20</x>
      <y>230</y>
      <width>89</width>
      <height>25</height>
@@ -29,7 +29,7 @@
   <widget class="QPushButton" name="btn_log">
    <property name="geometry">
     <rect>
-     <x>490</x>
+     <x>270</x>
      <y>230</y>
      <width>89</width>
      <height>25</height>
@@ -42,7 +42,7 @@
   <widget class="QCheckBox" name="check_pw">
    <property name="geometry">
     <rect>
-     <x>240</x>
+     <x>20</x>
      <y>200</y>
      <width>151</width>
      <height>23</height>
@@ -55,7 +55,7 @@
   <widget class="QCheckBox" name="check_name">
    <property name="geometry">
     <rect>
-     <x>450</x>
+     <x>230</x>
      <y>200</y>
      <width>151</width>
      <height>23</height>
@@ -68,7 +68,7 @@
   <widget class="QGroupBox" name="groupBox">
    <property name="geometry">
     <rect>
-     <x>240</x>
+     <x>20</x>
      <y>30</y>
      <width>341</width>
      <height>151</height>
@@ -127,7 +127,7 @@
   <widget class="QLabel" name="label_title">
    <property name="geometry">
     <rect>
-     <x>370</x>
+     <x>150</x>
      <y>0</y>
      <width>81</width>
      <height>17</height>
