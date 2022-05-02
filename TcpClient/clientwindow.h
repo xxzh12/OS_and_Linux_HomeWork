@@ -32,7 +32,6 @@ private slots:
     void slot_btnSendMsg();    // 点击发送按钮后，后发送消息
     void slot_sendloginmessage();
 
-
 private:
     Ui::ClientWindow *ui;
     LogWidget *m_log;

@@ -7,6 +7,8 @@ LogWidget::LogWidget(QWidget *parent) :
     ui(new Ui::LogWidget)
 {
     ui->setupUi(this);
+    setWindowTitle("聊天室登录");
+    this->setWindowIcon(QIcon("./Images/Chats.png"));
     //form_init();
     func_init();
 }
@@ -81,7 +83,6 @@ void LogWidget::btn_log_clicked()
 {
     m_username = ui->edit_name->text();
     m_password = ui->edit_pw->text();
-
 
 
   //  if (name == m_username && password == m_password)
