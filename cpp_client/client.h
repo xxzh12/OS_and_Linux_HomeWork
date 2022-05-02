@@ -8,7 +8,7 @@
 #define KEY_LOGIN 9
 //按esc键进入登出模式
 #define KEY_LOGOUT 27
-#define KEY_INPUT 35
+#define KEY_INPUT -1
 #define KEY_LOGOUTED -2
 #endif
 

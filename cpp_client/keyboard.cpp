@@ -1,6 +1,7 @@
 #include <termio.h>
 #include <stdio.h>
  
+ //暂时先使用键盘监听控制状态，后续需要切换到Qt中
 int scanKeyboard()
 {
     int input;
@@ -15,6 +16,7 @@ int scanKeyboard()
     tcsetattr(0,TCSANOW,&new_settings);
       
     input = getchar();
+    printf("123\n");
       
     tcsetattr(0,TCSANOW,&stored_settings);
     return input;
