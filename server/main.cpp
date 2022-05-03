@@ -74,8 +74,8 @@ int main()
                     {
                         string username = dp.readTextContent(fd, dataLength);
                         online.appendUser(fd, account, username);
-                        string Loginmessage = username + "logined";
-                        //cout << Loginmessage << endl;
+                        string Loginmessage = "----------" + username + " login----------";
+                        cout << Loginmessage << endl;
                         dp.writeTextToAllUser(online.getAllReadFd(), Loginmessage);
                     }
                         break;
@@ -92,6 +92,11 @@ int main()
                         break;
                     case LOGOUT:
                     {
+                        string username = online.getUserName(account);
+                        string Logoutmessage = "----------" + username + "logout---------";
+                        cout << Logoutmessage << endl;
+                        dp.writeTextToAllUser(online.getAllReadFd(), Logoutmessage);
+                        online.removeUser(fd);
                         ev.data.fd = fd;
                         ev.events = EPOLLIN;
                         epoll_ctl(epfd, EPOLL_CTL_DEL, fd, &ev);

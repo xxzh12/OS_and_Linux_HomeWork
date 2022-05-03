@@ -1,4 +1,4 @@
-export CPLUS_INCLUDE_PATH = /home/xxzh-3/HomeWork8/OS_and_Linux_HomeWork/server/include:$CPLUS_INCLUDE_PATH
+export CPLUS_INCLUDE_PATH = ./include:$CPLUS_INCLUDE_PATH
 cc = g++
 OBJ = ./out/main.o ./out/DataProcesser.o ./out/HeadData.o ./out/Online.o
 
