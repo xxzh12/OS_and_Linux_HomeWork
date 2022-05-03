@@ -22,6 +22,7 @@ public:
     ~ClientWindow();
 
     QTcpSocket* m_socket;      // 客户端套接字
+    LogWidget *m_log;
 
     void connectToServer();    // 连接到服务器
     char* encode(char* msg, unsigned int protocolId, unsigned int account, unsigned int dataType, unsigned int dataLength);
@@ -34,7 +35,7 @@ private slots:
 
 private:
     Ui::ClientWindow *ui;
-    LogWidget *m_log;
+
 };
 
 #endif // CLIENTWINDOW_H

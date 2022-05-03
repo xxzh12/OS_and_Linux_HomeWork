@@ -12,6 +12,8 @@
 #include <QString>
 #include <QDataStream>
 #include <QTextStream>
+#include <sys/stat.h>
+#include <QThread>
 
 using namespace std;
 //编码数据头中的元素信息
@@ -28,14 +30,14 @@ char* ClientWindow::encodeElement(char* datahead, unsigned int data, unsigned in
 
 //编码数据包
 char* ClientWindow::encode(char* msg, unsigned int protocolId, unsigned int account, unsigned int dataType, unsigned int dataLength) {
-    char* data = (char *)malloc(sizeof(msg)+8);
+    char* data = (char *)malloc(dataLength+9);
     char* datahead = data;
     datahead = encodeElement(datahead, protocolId, PROTOCOL_ID_SIZE);
     datahead = encodeElement(datahead, account, ACCOUNT_SIZE);
     datahead = encodeElement(datahead, dataType, DATA_TYPE_SIZE);
     datahead = encodeElement(datahead, dataLength, DATA_SIZE);
     printf("data packed\n");
-    strcpy(datahead, msg);
+    if (dataLength!=0) strcpy(datahead, msg);
     return data;
 }
 
@@ -91,6 +93,11 @@ ClientWindow::ClientWindow(QWidget *parent) :
         ui->msgTextEdit->setTextColor(color);
     });
     connect(ui->exitButton,&QPushButton::clicked,[=](){
+        //cout << "www" << endl;
+        char* str = encode(NULL, LOGOUT, (unsigned int)m_log->m_password.toInt(), TEXT, 0);
+        m_socket->write(str, 8);    // Exception
+        //cout << "sss" << endl;
+        m_socket->waitForBytesWritten();
         this->close();
     });
 }
@@ -121,7 +128,7 @@ void ClientWindow::connectToServer()
     // 如果想要实现局域网通信, 只需将第一个IP地址设置为“服务器”所在主机的IP地址即可
     // 如  m_socket->connectToHost("172.24.40.226", 19999);
     //m_socket->connectToHost(QHostAddress::LocalHost, 8888);
-    m_socket->connectToHost("192.168.43.67", 8888);
+    m_socket->connectToHost("192.168.43.231", 8888);
     connect(m_socket,SIGNAL(readyRead()),this,SLOT(slot_readMessage()));   // 告诉socket, 要用slot_readMessage()去处理接收的消息.
 
     connect(ui->pushButton,SIGNAL(clicked()),this,SLOT(slot_btnSendMsg()));
@@ -130,22 +137,33 @@ void ClientWindow::connectToServer()
 void ClientWindow::slot_readMessage()   // 只会在socket接收到server消息时调用
 {
     QString str = m_socket->readAll().data();
-
-
-    ui->textBrowser->setText(ui->textBrowser->toPlainText() + "\n" + str);
+    qDebug() << str;
+    ui->textBrowser->setText(ui->textBrowser->toHtml() + str+ '\n');
+    //qDebug() << str ;
+    //unsigned int len = m_log->m_username.length() + 1 + m_log->m_password.length() + 1 + 1;
+    //QString title = str.mid(0, len);
+    //QString message = str.mid(len, str.length()-len);
+    //ui->textBrowser->setText(ui->textBrowser->toPlainText() + str + '\n');
+    //qDebug() << str + len;
+    //cout << len << endl;
+    //ui->textBrowser->insertPlainText(title);
+    //ui->textBrowser->setText(ui->textBrowser->toPlainText() + title);
+    //ui->textBrowser->moveCursor(QTextCursor::End);
+    //ui->textBrowser->setText(ui->textBrowser->toHtml() + message+ '\n');
+    //ui->textBrowser->moveCursor(QTextCursor::End);
 }
 
 void ClientWindow::slot_btnSendMsg()
 {
-    //QString message = ui->lineEdit->text();
-    QString message = ui->msgTextEdit->toPlainText();
+    //QString message = ui->msgTextEdit->toPlainText() ;
+    QString message = ui->msgTextEdit->toHtml() ;
     std::string st = message.toStdString();
     char* MM = (char *)st.c_str();
     char* str = encode(MM, SEND, (unsigned int)m_log->m_password.toInt(), TEXT, (unsigned int)message.length());
     m_socket->write(str, strlen(MM)+8);    // Exception
 
     ui->msgTextEdit->clear();
-
+    free(str);
 }
 
 ClientWindow::~ClientWindow()
