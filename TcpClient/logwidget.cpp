@@ -165,3 +165,4 @@ void LogWidget::message_init(QString flag1,QString flag2)
 }
 
 
+

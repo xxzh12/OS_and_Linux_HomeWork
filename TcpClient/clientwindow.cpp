@@ -98,7 +98,7 @@ ClientWindow::ClientWindow(QWidget *parent) :
 void ClientWindow::slot_sendloginmessage()
 {
     connectToServer();
-    cout << m_log->m_username.length() << endl;
+    //cout << m_log->m_username.length() << endl;
     std::string st = m_log->m_username.toStdString();
     char* name = (char *)st.c_str();
     char* str = encode(name, LOGIN, (unsigned int)m_log->m_password.toInt(), TEXT, (unsigned int)m_log->m_username.length());
@@ -120,8 +120,8 @@ void ClientWindow::connectToServer()
     // 尝试连接到IP为"127.0.0.1" & 端口号为8888服务器
     // 如果想要实现局域网通信, 只需将第一个IP地址设置为“服务器”所在主机的IP地址即可
     // 如  m_socket->connectToHost("172.24.40.226", 19999);
-    m_socket->connectToHost(QHostAddress::LocalHost, 8888);
-
+    //m_socket->connectToHost(QHostAddress::LocalHost, 8888);
+    m_socket->connectToHost("192.168.43.67", 8888);
     connect(m_socket,SIGNAL(readyRead()),this,SLOT(slot_readMessage()));   // 告诉socket, 要用slot_readMessage()去处理接收的消息.
 
     connect(ui->pushButton,SIGNAL(clicked()),this,SLOT(slot_btnSendMsg()));
@@ -132,7 +132,7 @@ void ClientWindow::slot_readMessage()   // 只会在socket接收到server消息�
     QString str = m_socket->readAll().data();
 
 
-    ui->textBrowser->setText(ui->textBrowser->toHtml() + "\n" + str);
+    ui->textBrowser->setText(ui->textBrowser->toPlainText() + "\n" + str);
 }
 
 void ClientWindow::slot_btnSendMsg()

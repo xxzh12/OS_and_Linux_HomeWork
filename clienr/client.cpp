@@ -1,2 +1,0 @@
-/* client.cpp by Chaos */
-

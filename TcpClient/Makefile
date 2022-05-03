@@ -275,6 +275,7 @@ DIST          = ../Qt5.14.2/5.14.2/gcc_64/mkspecs/features/spec_pre.prf \
 		../Qt5.14.2/5.14.2/gcc_64/mkspecs/features/yacc.prf \
 		../Qt5.14.2/5.14.2/gcc_64/mkspecs/features/lex.prf \
 		TcpClient.pro clientwindow.h \
+		common.h \
 		logwidget.h clientwindow.cpp \
 		logwidget.cpp \
 		main.cpp
@@ -732,7 +733,7 @@ distdir: FORCE
 	$(COPY_FILE) --parents $(DIST) $(DISTDIR)/
 	$(COPY_FILE) --parents res.qrc $(DISTDIR)/
 	$(COPY_FILE) --parents ../Qt5.14.2/5.14.2/gcc_64/mkspecs/features/data/dummy.cpp $(DISTDIR)/
-	$(COPY_FILE) --parents clientwindow.h logwidget.h $(DISTDIR)/
+	$(COPY_FILE) --parents clientwindow.h common.h logwidget.h $(DISTDIR)/
 	$(COPY_FILE) --parents clientwindow.cpp logwidget.cpp main.cpp $(DISTDIR)/
 	$(COPY_FILE) --parents clientwindow.ui logwidget.ui $(DISTDIR)/
 
@@ -1192,13 +1193,36 @@ clientwindow.o: clientwindow.cpp clientwindow.h \
 		../Qt5.14.2/5.14.2/gcc_64/include/QtWidgets/qdesktopwidget.h \
 		../Qt5.14.2/5.14.2/gcc_64/include/QtGui/qguiapplication.h \
 		../Qt5.14.2/5.14.2/gcc_64/include/QtGui/qinputmethod.h \
-		../Qt5.14.2/5.14.2/gcc_64/include/QtWidgets/QLineEdit \
-		../Qt5.14.2/5.14.2/gcc_64/include/QtWidgets/qlineedit.h \
+		../Qt5.14.2/5.14.2/gcc_64/include/QtWidgets/QComboBox \
+		../Qt5.14.2/5.14.2/gcc_64/include/QtWidgets/qcombobox.h \
+		../Qt5.14.2/5.14.2/gcc_64/include/QtWidgets/qabstractitemdelegate.h \
+		../Qt5.14.2/5.14.2/gcc_64/include/QtWidgets/qstyleoption.h \
+		../Qt5.14.2/5.14.2/gcc_64/include/QtWidgets/qabstractspinbox.h \
+		../Qt5.14.2/5.14.2/gcc_64/include/QtGui/qvalidator.h \
+		../Qt5.14.2/5.14.2/gcc_64/include/QtCore/qregularexpression.h \
+		../Qt5.14.2/5.14.2/gcc_64/include/QtWidgets/qslider.h \
+		../Qt5.14.2/5.14.2/gcc_64/include/QtWidgets/qabstractslider.h \
+		../Qt5.14.2/5.14.2/gcc_64/include/QtWidgets/qstyle.h \
+		../Qt5.14.2/5.14.2/gcc_64/include/QtWidgets/qtabbar.h \
+		../Qt5.14.2/5.14.2/gcc_64/include/QtWidgets/qrubberband.h \
 		../Qt5.14.2/5.14.2/gcc_64/include/QtWidgets/qframe.h \
-		../Qt5.14.2/5.14.2/gcc_64/include/QtGui/qtextcursor.h \
-		../Qt5.14.2/5.14.2/gcc_64/include/QtGui/qtextformat.h \
-		../Qt5.14.2/5.14.2/gcc_64/include/QtGui/qpen.h \
-		../Qt5.14.2/5.14.2/gcc_64/include/QtGui/qtextoption.h \
+		../Qt5.14.2/5.14.2/gcc_64/include/QtCore/qabstractitemmodel.h \
+		../Qt5.14.2/5.14.2/gcc_64/include/QtWidgets/QFontComboBox \
+		../Qt5.14.2/5.14.2/gcc_64/include/QtWidgets/qfontcombobox.h \
+		../Qt5.14.2/5.14.2/gcc_64/include/QtGui/qfontdatabase.h \
+		../Qt5.14.2/5.14.2/gcc_64/include/QtWidgets/QFrame \
+		../Qt5.14.2/5.14.2/gcc_64/include/QtWidgets/QHBoxLayout \
+		../Qt5.14.2/5.14.2/gcc_64/include/QtWidgets/qboxlayout.h \
+		../Qt5.14.2/5.14.2/gcc_64/include/QtWidgets/qlayout.h \
+		../Qt5.14.2/5.14.2/gcc_64/include/QtWidgets/qlayoutitem.h \
+		../Qt5.14.2/5.14.2/gcc_64/include/QtWidgets/qgridlayout.h \
+		../Qt5.14.2/5.14.2/gcc_64/include/QtWidgets/QHeaderView \
+		../Qt5.14.2/5.14.2/gcc_64/include/QtWidgets/qheaderview.h \
+		../Qt5.14.2/5.14.2/gcc_64/include/QtWidgets/qabstractitemview.h \
+		../Qt5.14.2/5.14.2/gcc_64/include/QtWidgets/qabstractscrollarea.h \
+		../Qt5.14.2/5.14.2/gcc_64/include/QtCore/qitemselectionmodel.h \
+		../Qt5.14.2/5.14.2/gcc_64/include/QtWidgets/QLabel \
+		../Qt5.14.2/5.14.2/gcc_64/include/QtWidgets/qlabel.h \
 		../Qt5.14.2/5.14.2/gcc_64/include/QtWidgets/QMenu \
 		../Qt5.14.2/5.14.2/gcc_64/include/QtWidgets/qmenu.h \
 		../Qt5.14.2/5.14.2/gcc_64/include/QtWidgets/QMenuBar \
@@ -1206,13 +1230,31 @@ clientwindow.o: clientwindow.cpp clientwindow.h \
 		../Qt5.14.2/5.14.2/gcc_64/include/QtWidgets/QPushButton \
 		../Qt5.14.2/5.14.2/gcc_64/include/QtWidgets/qpushbutton.h \
 		../Qt5.14.2/5.14.2/gcc_64/include/QtWidgets/qabstractbutton.h \
+		../Qt5.14.2/5.14.2/gcc_64/include/QtWidgets/QSplitter \
+		../Qt5.14.2/5.14.2/gcc_64/include/QtWidgets/qsplitter.h \
 		../Qt5.14.2/5.14.2/gcc_64/include/QtWidgets/QStatusBar \
 		../Qt5.14.2/5.14.2/gcc_64/include/QtWidgets/qstatusbar.h \
+		../Qt5.14.2/5.14.2/gcc_64/include/QtWidgets/QTableWidget \
+		../Qt5.14.2/5.14.2/gcc_64/include/QtWidgets/qtablewidget.h \
+		../Qt5.14.2/5.14.2/gcc_64/include/QtWidgets/qtableview.h \
 		../Qt5.14.2/5.14.2/gcc_64/include/QtWidgets/QTextBrowser \
 		../Qt5.14.2/5.14.2/gcc_64/include/QtWidgets/qtextbrowser.h \
 		../Qt5.14.2/5.14.2/gcc_64/include/QtWidgets/qtextedit.h \
-		../Qt5.14.2/5.14.2/gcc_64/include/QtWidgets/qabstractscrollarea.h \
-		../Qt5.14.2/5.14.2/gcc_64/include/QtGui/qtextdocument.h
+		../Qt5.14.2/5.14.2/gcc_64/include/QtGui/qtextdocument.h \
+		../Qt5.14.2/5.14.2/gcc_64/include/QtGui/qtextoption.h \
+		../Qt5.14.2/5.14.2/gcc_64/include/QtGui/qtextcursor.h \
+		../Qt5.14.2/5.14.2/gcc_64/include/QtGui/qtextformat.h \
+		../Qt5.14.2/5.14.2/gcc_64/include/QtGui/qpen.h \
+		../Qt5.14.2/5.14.2/gcc_64/include/QtWidgets/QTextEdit \
+		../Qt5.14.2/5.14.2/gcc_64/include/QtWidgets/QToolButton \
+		../Qt5.14.2/5.14.2/gcc_64/include/QtWidgets/qtoolbutton.h \
+		common.h \
+		../Qt5.14.2/5.14.2/gcc_64/include/QtGui/QFont \
+		../Qt5.14.2/5.14.2/gcc_64/include/QtWidgets/QColorDialog \
+		../Qt5.14.2/5.14.2/gcc_64/include/QtWidgets/qcolordialog.h \
+		../Qt5.14.2/5.14.2/gcc_64/include/QtCore/QString \
+		../Qt5.14.2/5.14.2/gcc_64/include/QtCore/QDataStream \
+		../Qt5.14.2/5.14.2/gcc_64/include/QtCore/QTextStream
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o clientwindow.o clientwindow.cpp
 
 logwidget.o: logwidget.cpp logwidget.h \
