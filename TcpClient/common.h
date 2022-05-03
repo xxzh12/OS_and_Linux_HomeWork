@@ -1,3 +1,8 @@
+#ifndef COMMON_H
+#define COMMON_H
+
+#endif // COMMON_H
+
 #ifndef PROTOCOLMSG_H
 #define PROTOCOLMSG_H
 #define BASE_BUFFER_SIZE 8

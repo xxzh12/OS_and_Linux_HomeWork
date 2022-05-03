@@ -31,6 +31,8 @@ public:
     void read_json();
     void write_json();
     void message_init(QString flag1,QString flag2);
+    QString m_username;
+    QString m_password;
 
 
 signals:
@@ -47,8 +49,7 @@ private:
     Ui::LogWidget *ui;
 
 
-    QString m_username;
-    QString m_password;
+
 
 
 };

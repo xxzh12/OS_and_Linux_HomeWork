@@ -24,11 +24,13 @@ public:
     QTcpSocket* m_socket;      // 客户端套接字
 
     void connectToServer();    // 连接到服务器
+    char* encode(char* msg, unsigned int protocolId, unsigned int account, unsigned int dataType, unsigned int dataLength);
+    char* encodeElement(char* datahead, unsigned int data, unsigned int len);
 
 private slots:
     void slot_readMessage();   // 处理接收服务器方发送的消息
     void slot_btnSendMsg();    // 点击发送按钮后，后发送消息
-
+    void slot_sendloginmessage();
 
 private:
     Ui::ClientWindow *ui;

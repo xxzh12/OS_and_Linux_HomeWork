@@ -81,8 +81,8 @@ void LogWidget::btn_clear_clicked()
 
 void LogWidget::btn_log_clicked()
 {
-    QString name = ui->edit_name->text();
-    QString password = ui->edit_pw->text();
+    m_username = ui->edit_name->text();
+    m_password = ui->edit_pw->text();
 
 
   //  if (name == m_username && password == m_password)
@@ -163,5 +163,6 @@ void LogWidget::message_init(QString flag1,QString flag2)
         ui->check_pw->setChecked(true);
     }
 }
+
 
 

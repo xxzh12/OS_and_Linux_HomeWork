@@ -23,6 +23,7 @@ SOURCES += \
 
 HEADERS += \
     clientwindow.h \
+    common.h \
     logwidget.h
 
 FORMS += \
