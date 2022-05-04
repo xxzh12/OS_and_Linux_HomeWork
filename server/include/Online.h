@@ -14,4 +14,6 @@ public:
     vector<int> getAllReadFd();
 
     string getUserName(int account);
+
+    void printAllUserFd();
 };

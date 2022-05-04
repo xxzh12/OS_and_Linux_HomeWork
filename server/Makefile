@@ -1,6 +1,6 @@
 export CPLUS_INCLUDE_PATH = ./include:$CPLUS_INCLUDE_PATH
 cc = g++
-OBJ = ./out/main.o ./out/DataProcesser.o ./out/HeadData.o ./out/Online.o
+OBJ = ./out/main.o ./out/DataProcesser.o ./out/HeadData.o ./out/Online.o ./out/DataEncoder.o
 
 main:$(OBJ)
 	$(cc) $(OBJ) -o main
@@ -16,6 +16,9 @@ main:$(OBJ)
 
 ./out/Online.o: ./Online/Online.cpp
 	$(cc) -c ./Online/Online.cpp -o ./out/Online.o
+
+./out/DataEncoder.o: ./ProtocolHead/DataEncoder.cpp
+	$(cc) -c ./ProtocolHead/DataEncoder.cpp -o ./out/DataEncoder.o
 
 .PHONY:clean
 clean:

@@ -6,7 +6,12 @@ bool Online::appendUser(int fd, int account, string username){
 }
 
 bool Online::removeUser(int fd){
-    remove(this->user.begin(), this->user.end(), fd);
+    for (vector<int>::iterator iter = this->user.begin(); iter != this->user.end(); iter++)
+        if ((*iter) == fd) 
+        {
+            this->user.erase(iter);
+            break;
+        }
 }
 
 vector<int> Online::getAllReadFd() {
@@ -15,4 +20,12 @@ vector<int> Online::getAllReadFd() {
 
 string Online::getUserName(int account){
     return this->UserList[account];
+}
+
+
+void Online::printAllUserFd(){
+    for (int i = 0; i < this->user.size(); i++)
+    {
+        printf("fd list %d\n", this->user[i]);
+    }
 }

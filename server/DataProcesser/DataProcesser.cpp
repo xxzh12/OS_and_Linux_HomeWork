@@ -33,7 +33,7 @@ string DataProcesser::readTextContent(int fd, unsigned int dataLength) {
 void DataProcesser::writeText(int fd, string text){
     int count = 0;
     unsigned int dataLength = text.length();
-    const char *data = text.data();
+    char *data = (char *)text.data();
     unsigned int buffSize = TCP_BUFSIZE;
     while (true) {
         ssize_t size = send(fd, data, min(buffSize, dataLength - count), MSG_NOSIGNAL);

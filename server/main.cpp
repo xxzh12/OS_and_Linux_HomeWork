@@ -41,7 +41,9 @@ int main()
     Online online;
     while (true){
         //等待事件的产生，返回的是产生的事件数
+        //cout << "yes" << endl;
         int nready = epoll_wait(epfd, events, MAX_CONNECTIONS, -1);
+        //cout << "no" << endl;
         if (nready < 0) {
             cout << "epoll_wait error" << endl;
             exit(-1);
@@ -59,6 +61,7 @@ int main()
                 //设置超时read
                 struct timeval timeout = {1, 0}; //超时时间设置为1.0s
                 setsockopt(cfd, SOL_SOCKET, SO_RCVTIMEO, (char *) &timeout, sizeof(struct timeval)); //套接字选项SO_RCVTIMEO： 用来设置socket接收数据的超时时间；
+                cout << cfd << "收到连接请求" << endl;
             }
             else if (events[i].events & EPOLLIN) {//EPOLLIN表示对应的文件描述符可以读。如果监听到的事件里包含可读事件
                 //这里每次都接收到完整的消息，包括协议头+消息内容（这里是广义上的消息，不只是聊天的内容）
@@ -74,7 +77,7 @@ int main()
                     {
                         string username = dp.readTextContent(fd, dataLength);
                         online.appendUser(fd, account, username);
-                        string Loginmessage = "----------" + username + " login----------";
+                        string Loginmessage = "(" + username + " login)";
                         cout << Loginmessage << endl;
                         dp.writeTextToAllUser(online.getAllReadFd(), Loginmessage);
                     }
@@ -82,7 +85,7 @@ int main()
                     case SEND:
                     {
                         string message = dp.readTextContent(fd, dataLength);
-                        string baseMsg = online.getUserName(account) + "(" + to_string(account) + ")说:";
+                        string baseMsg = online.getUserName(account) + "(" + to_string(account) + "):";
                         cout << baseMsg + message <<endl;
                         if (dataType == TEXT) {
                             dp.writeTextToAllUser(online.getAllReadFd(), baseMsg + message);
@@ -93,9 +96,10 @@ int main()
                     case LOGOUT:
                     {
                         string username = online.getUserName(account);
-                        string Logoutmessage = "----------" + username + "logout---------";
+                        string Logoutmessage = "(" + username + "logout)";
                         cout << Logoutmessage << endl;
                         dp.writeTextToAllUser(online.getAllReadFd(), Logoutmessage);
+                        //cout << "size" << online.getAllReadFd().size() << endl;
                         online.removeUser(fd);
                         ev.data.fd = fd;
                         ev.events = EPOLLIN;
