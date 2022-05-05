@@ -12,7 +12,7 @@ int MYsqldb::initial(QSqlDatabase db)
      db = QSqlDatabase::addDatabase("QMYSQL");
            db.setHostName("192.168.59.128");
            db.setPort(3306);
-           db.setUserName("sleipnir");
+           db.setUserName("root");
            db.setPassword("123456");
            db.setDatabaseName("test");
            QString s=db.connectionName();
@@ -40,7 +40,9 @@ void MYsqldb::close(QSqlDatabase db)
 int MYsqldb::createtb(QSqlDatabase db,QString tbname)
 {
     QSqlQuery query;
-    QString sql=QString("create table %1 (ID INT PRIMARY KEY AUTO_INCREMENT,username varchar(255),dt_value datetime,type TINYINT,text_value TEXT );").arg(tbname);
+    QString sql=QString("create table %1 (ID INT PRIMARY KEY AUTO_INCREMENT,"
+                        "username varchar(255),dt_value datetime,type TINYINT,text_value TEXT,image LONGBLOB );").arg(tbname);
+    //type=1为文本,type=2为图片
     query.prepare(sql);
     if(!query.exec(sql)){
                 qDebug()<<"query error :"<<query.lastError();
@@ -70,7 +72,7 @@ int MYsqldb::cleartb(QSqlDatabase db,QString tbname)
 
 }
 
-int MYsqldb::inprotdata(QSqlDatabase db, QString tbname,QString username,QString tm ,int type,QString txt)
+int MYsqldb::inportms(QSqlDatabase db, QString tbname,QString username,QString tm ,int type,QString txt)
 {
 
     QSqlQuery query;
@@ -85,7 +87,7 @@ else {
 }
 }
 
-QStringList MYsqldb::exprotdatall(QSqlDatabase db, QString tbname)
+QStringList MYsqldb::exportdatallms(QSqlDatabase db, QString tbname)
 {
    QSqlQuery query;
    QStringList sqlist;
@@ -95,34 +97,73 @@ QStringList MYsqldb::exprotdatall(QSqlDatabase db, QString tbname)
    }
    else{
    while(query.next()){
+       if(query.value(3)==1){
 
    sqlist<<query.value(1).toString()<<query.value(2).toString()<<query.value(3).toString()<<query.value(4).toString();
+
+       }
+       else {
+         sqlist<<query.value(1).toString()<<query.value(2).toString()<<query.value(3).toString()<<query.value(5).toStringList();
+         //接受处用.toByteArray转化为二进制格式
+       }
    }
 
   return sqlist;
    }
 }
 
-QStringList MYsqldb::exportdataul(QSqlDatabase db, QString tbname, int num)
+QStringList MYsqldb::exportdataulms(QSqlDatabase db, QString tbname, int num)
 {
 
     QSqlQuery query;
-    int i=1;
+    int i=0;
     QStringList sqlist;
     QString sl=QString("select * from %1").arg(tbname);
     if(!query.exec(sl))
-    {qDebug()<<"query error :" <<query.lastError();
+    {qDebug()<<"indValuequery error :" <<query.lastError();
     }
     else{
     while(query.next()){ i++;}
     qDebug()<<QString::number(i);
     int j=i-num+1;
-    query.seek(j);
+    //sl=QString("select * from %1").arg(tbname);
+    qDebug()<<QString::number(j);
+    query.seek(j-2);
     while(query.next()){
+        if(query.value(3)==1){
 
     sqlist<<query.value(1).toString()<<query.value(2).toString()<<query.value(3).toString()<<query.value(4).toString();
+
+        }
+        else {
+          sqlist<<query.value(1).toString()<<query.value(2).toString()<<query.value(3).toString()<<query.value(5).toStringList();
+          //接受处用.toByteArray转化为二进制格式
+        }
     }
 
    return sqlist;
     }
 }
+
+int MYsqldb::inportpt(QSqlDatabase db, QString tbname, QString username, QString tm, int type, QByteArray pt)
+{
+    if(type!=2) return 0;
+    else {
+
+
+    QSqlQuery query;
+QString sql=QString("insert into %1(username,dt_value,type,image) values('%2','%3','%4',?)").arg(tbname).arg(username).arg(tm).arg(type).arg("11111");
+query.prepare(sql);
+query.addBindValue(pt);
+if(!query.exec())
+{qDebug()<<"query error :" <<query.lastError();
+    return 0;
+}
+else {
+    qDebug()<<"insert image successfully!";
+    return 1;
+}
+    }
+}
+
+

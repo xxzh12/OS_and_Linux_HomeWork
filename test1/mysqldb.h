@@ -11,6 +11,8 @@
 #include <QStringList>
 #include <QStringListIterator>
 #include <iostream>
+#include <QByteArray>
+#include <QFile>
 
 class MYsqldb
 {
@@ -19,9 +21,10 @@ public:
   void close (QSqlDatabase db);
   int createtb (QSqlDatabase db,QString tbname);
   int cleartb (QSqlDatabase db,QString tbname);
-  int inprotdata (QSqlDatabase db, QString tbname,QString username,QString tm ,int type,QString txt);
-QStringList exprotdatall(QSqlDatabase db,QString tbname);
-  QStringList exportdataul (QSqlDatabase db,QString tbname,int num);
+  int inportms (QSqlDatabase db, QString tbname,QString username,QString tm ,int type,QString txt);
+  int inportpt (QSqlDatabase db,QString tbname,QString username,QString tm,int type,QByteArray pt);
+QStringList exportdatallms(QSqlDatabase db,QString tbname);
+  QStringList exportdataulms (QSqlDatabase db,QString tbname,int num);
 
 
 };
