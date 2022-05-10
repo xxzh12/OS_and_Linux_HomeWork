@@ -2,14 +2,7 @@
 #define LOGWIDGET_H
 
 
-#include <QWidget>
-#include <QMessageBox>
-#include <QJsonDocument>
-#include <QFile>
-#include <QDebug>
-#include <QJsonObject>
-#include <QByteArray>
-
+#include "common.h"
 
 namespace Ui {
 class LogWidget;

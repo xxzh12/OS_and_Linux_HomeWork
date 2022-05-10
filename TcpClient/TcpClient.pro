@@ -1,4 +1,4 @@
-QT       += core gui
+QT       += core gui sql
 QT     +=network
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
@@ -18,13 +18,19 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 SOURCES += \
     clientwindow.cpp \
+    dataparser.cpp \
     logwidget.cpp \
-    main.cpp
+    main.cpp \
+    mysqldb.cpp \
+    readclient.cpp
 
 HEADERS += \
     clientwindow.h \
     common.h \
-    logwidget.h
+    dataparser.h \
+    logwidget.h \
+    mysqldb.h \
+    readclient.h
 
 FORMS += \
     clientwindow.ui \

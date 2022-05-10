@@ -57,13 +57,10 @@ void LogWidget::func_init()
     // 发出信号后关闭登录窗口的信号槽连接
     connect(this,SIGNAL(close_window()),this,SLOT(close()));
 
-
     ui->edit_pw->setEchoMode(QLineEdit::Password);//输入的时候就显示圆点
-
 
     //m_username = "sazass";
     //m_password = "123456";
-
 
     read_json();
 }
