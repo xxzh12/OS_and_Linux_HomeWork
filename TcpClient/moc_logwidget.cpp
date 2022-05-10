@@ -7,7 +7,7 @@
 *****************************************************************************/
 
 #include <memory>
-#include "logwidget.h"
+#include "../TcpClientxcy/TcpClient/logwidget.h"
 #include <QtCore/qbytearray.h>
 #include <QtCore/qmetatype.h>
 #if !defined(Q_MOC_OUTPUT_REVISION)

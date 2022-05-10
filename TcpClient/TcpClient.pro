@@ -19,15 +19,19 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 SOURCES += \
     clientwindow.cpp \
+    dataparser.cpp \
     logwidget.cpp \
     main.cpp \
-    mysqldb.cpp
+    mysqldb.cpp \
+    readclient.cpp
 
 HEADERS += \
     clientwindow.h \
     common.h \
+    dataparser.h \
     logwidget.h \
-    mysqldb.h
+    mysqldb.h \
+    readclient.h
 
 FORMS += \
     clientwindow.ui \

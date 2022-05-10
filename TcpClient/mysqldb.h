@@ -17,18 +17,19 @@
 class MYsqldb
 {
 public:
-  int initial(QSqlDatabase db);
-  void close (QSqlDatabase db);
-  int createtb (QSqlDatabase db,QString tbname);
-  int cleartb (QSqlDatabase db,QString tbname);
-  int inportms (QSqlDatabase db, QString tbname,QString username,QString tm ,int type,QString txt);
-  void IntegratedSendMsg(QString UserName, QString message);
-  QStringList IntegratedGetMsg();
-  int inportpt (QSqlDatabase db,QString tbname,QString username,QString tm,int type,QString im);
-QStringList exportdatallms(QSqlDatabase db,QString tbname);
-  QStringList exportdataulms (QSqlDatabase db,QString tbname,int num);
+    MYsqldb();
+    int initial(QSqlDatabase db);
+    void close (QSqlDatabase db);
+    int createtb (QSqlDatabase db,QString tbname);
+    int cleartb (QSqlDatabase db,QString tbname);
+    int inportms (QSqlDatabase db, QString tbname,QString username,QString tm ,int type,QString txt);
+    void IntegratedSendMsg(QString UserName, QString message);
+    QStringList IntegratedGetMsg();
+    int inportpt (QSqlDatabase db,QString tbname,QString username,QString tm,int type,QString im);
+    QStringList exportdatallms(QSqlDatabase db,QString tbname);
+    QStringList exportdataulms (QSqlDatabase db,QString tbname,int num);
 
-
+    ~MYsqldb();
 };
 
 

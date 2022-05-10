@@ -1,22 +1,8 @@
 // 程序：TcpClient
 // 源文件：clientWindow.cpp
 
-#include <bits/stdc++.h>
 #include "clientwindow.h"
 #include "ui_clientwindow.h"
-#include "common.h"
-#include <QFont>
-#include <QColorDialog>
-#include <QMessageBox>
-#include <QDebug>
-#include <QString>
-#include <QDataStream>
-#include <QTextStream>
-#include <sys/stat.h>
-#include <QThread>
-#include <QDateTime>
-#include <QPixmap>
-#include <QFileDialog>
 
 using namespace std;
 //编码数据头中的元素信息
@@ -53,6 +39,7 @@ ClientWindow::ClientWindow(QWidget *parent) :
     ui->setupUi(this);
     m_log = new LogWidget;
     m_log->show();
+    rd = new ReadClient;
     // 注意，这个信号槽的作用就是激活主窗口的，我们已经让主窗口不可以自动打开，
     // 必须通过登录窗口中登录按钮发出的信号槽的信号才能打开
     connect(m_log,SIGNAL(login()),this,SLOT(show()));
@@ -125,6 +112,22 @@ ClientWindow::ClientWindow(QWidget *parent) :
         m_socket->waitForBytesWritten();
         this->close();
     });
+    // send message signal
+    // display message fuction
+
+    connect(rd, &ReadClient::textDisplayAble,[=](){
+       QString content = QString::fromStdString(rd->content);
+       // ui->textBrowser->setText(ui->textBrowser->toPlainText() + "\n" + content);
+
+       QString str = content;
+       QString strBuffer;
+       QDateTime time;
+       time = QDateTime::currentDateTime();
+       strBuffer = time.toString("yyyy-MM-dd hh:mm:ss dddd");
+       //qDebug() << str;
+       ui->textBrowser->setText(ui->textBrowser->toPlainText() +'\n'+strBuffer);
+       ui->textBrowser->setText(ui->textBrowser->toPlainText() + str+ '\n');
+    });
 }
 
 void ClientWindow::slot_sendloginmessage()
@@ -172,9 +175,9 @@ void ClientWindow::connectToServer()
     // 如果想要实现局域网通信, 只需将第一个IP地址设置为“服务器”所在主机的IP地址即可
     // 如  m_socket->connectToHost("172.24.40.226", 19999);
     //m_socket->connectToHost(QHostAddress::LocalHost, 8888);
-    qDebug() << "192" ;
+    // qDebug() << "192" ;
     m_socket->connectToHost("192.168.43.231", 8888);
-    qDebug() << "168" ;
+    // qDebug() << "168" ;
     connect(m_socket,SIGNAL(readyRead()),this,SLOT(slot_readMessage()));   // 告诉socket, 要用slot_readMessage()去处理接收的消息.
 
     connect(ui->pushButton,SIGNAL(clicked()),this,SLOT(slot_btnSendMsg()));
@@ -182,26 +185,8 @@ void ClientWindow::connectToServer()
 
 void ClientWindow::slot_readMessage()   // 只会在socket接收到server消息时调用
 {
-    QString str = m_socket->readAll().data();
-    QString strBuffer;
-        QDateTime time;
-        time = QDateTime::currentDateTime();
-        strBuffer = time.toString("yyyy-MM-dd hh:mm:ss dddd");
-    //qDebug() << str;
-    ui->textBrowser->setText(ui->textBrowser->toPlainText() +'\n'+strBuffer);
-    ui->textBrowser->setText(ui->textBrowser->toPlainText() + str+ '\n');
-    //qDebug() << str ;
-    //unsigned int len = m_log->m_username.length() + 1 + m_log->m_password.length() + 1 + 1;
-    //QString title = str.mid(0, len);
-    //QString message = str.mid(len, str.length()-len);
-    //ui->textBrowser->setText(ui->textBrowser->toPlainText() + str + '\n');
-    //qDebug() << str + len;
-    //cout << len << endl;
-    //ui->textBrowser->insertPlainText(title);
-    //ui->textBrowser->setText(ui->textBrowser->toPlainText() + title);
-    //ui->textBrowser->moveCursor(QTextCursor::End);
-    //ui->textBrowser->setText(ui->textBrowser->toHtml() + message+ '\n');
-    //ui->textBrowser->moveCursor(QTextCursor::End);
+    rd->m_socket = m_socket;
+    rd->readData();
 }
 
 void ClientWindow::slot_btnSendMsg()

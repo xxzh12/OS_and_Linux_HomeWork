@@ -4,9 +4,8 @@
 #ifndef CLIENTWINDOW_H
 #define CLIENTWINDOW_H
 
-#include <QMainWindow>
-#include <QTcpSocket>
-#include <QHostAddress>
+#include "common.h"
+#include "readclient.h"
 #include "logwidget.h"
 #include "mysqldb.h"
 
@@ -19,15 +18,23 @@ class ClientWindow : public QMainWindow
     Q_OBJECT
 
 public:
+    ReadClient *rd;
+
     explicit ClientWindow(QWidget *parent = nullptr);
     ~ClientWindow();
 
-    QTcpSocket* m_socket;      // 客户端套接字
-    LogWidget *m_log;
+    QTcpSocket *m_socket;      // 客户端套接字
+    char buffer[BUF_SIZE];
+    unsigned int protocolId;
+    unsigned int account;
+    unsigned int dataType;
+    unsigned int dataLength;
+    const string ACK_PACKET = acknowledge.toStdString();
 
     void connectToServer();    // 连接到服务器
-    char* encode(char* msg, unsigned int protocolId, unsigned int account, unsigned int dataType, unsigned int dataLength);
+    void read_HeadData();   //to parse the datahead
     char* encodeElement(char* datahead, unsigned int data, unsigned int len);
+    char* encode(char* msg, unsigned int protocolId, unsigned int account, unsigned int dataType, unsigned int dataLength);
 
 private slots:
     void slot_readMessage();   // 处理接收服务器方发送的消息
@@ -36,7 +43,6 @@ private slots:
 
 private:
     Ui::ClientWindow *ui;
-
+    LogWidget *m_log;
 };
-
 #endif // CLIENTWINDOW_H

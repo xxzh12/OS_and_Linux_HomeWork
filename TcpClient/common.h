@@ -1,10 +1,7 @@
 #ifndef COMMON_H
 #define COMMON_H
-
 #endif // COMMON_H
 
-#ifndef PROTOCOLMSG_H
-#define PROTOCOLMSG_H
 #define BASE_BUFFER_SIZE 8
 // size of the protocols
 #define PROTOCOL_ID_SIZE 1
@@ -36,4 +33,48 @@
 #define TYPE_COUNT 2
 #define MESSAGE_COUNT 3
 
-#endif // PROTOCOLMSG_H
+#define TCP_BUFSIZ 8192
+#define BUF_SIZE 8192
+
+#include <string>
+#include <cstring>
+#include <fstream>
+#include <iostream>
+#include <QString>
+#include <QStringList>
+#include <QStringListIterator>
+#include <QDebug>
+#include <QMessageBox>
+#include <QTextCodec>
+#include <QObject>
+#include <QJsonObject>
+#include <QJsonDocument>
+#include <QWidget>
+#include <QFile>
+#include <QByteArray>
+#include <QSqlDatabase>
+#include <QSqlError>
+#include <QSqlQuery>
+#include <QDebug>
+#include <QCoreApplication>
+#include <QDateTime>
+#include <QFont>
+#include <QColorDialog>
+#include <QDataStream>
+#include <QTextStream>
+#include <bits/stdc++.h>
+#include <QMainWindow>
+#include <QWidget>
+#include <QTcpSocket>
+#include <QtAlgorithms>
+#include <QDateTime>
+#include <QPixmap>
+#include <QFileDialog>
+#include <QFont>
+#include <QColorDialog>
+#include <QMessageBox>
+#include <QDataStream>
+#include <QTextStream>
+#include <sys/stat.h>
+#include <QThread>
+

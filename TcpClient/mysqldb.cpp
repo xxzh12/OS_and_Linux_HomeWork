@@ -6,6 +6,12 @@
 #include <QCoreApplication>
 #include <QMessageBox>
 
+MYsqldb::MYsqldb()
+{
+
+
+}
+
 int MYsqldb::initial(QSqlDatabase db)
 {
 
@@ -191,6 +197,11 @@ else {
     return 1;
 }
     }
+}
+
+MYsqldb::~MYsqldb()
+{
+
 }
 
 
