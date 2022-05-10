@@ -1,5 +1,6 @@
-QT       += core gui
+QT       += core gui sql
 QT     +=network
+RC_ICONS=icon/jie.ico
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -19,12 +20,14 @@ DEFINES += QT_DEPRECATED_WARNINGS
 SOURCES += \
     clientwindow.cpp \
     logwidget.cpp \
-    main.cpp
+    main.cpp \
+    mysqldb.cpp
 
 HEADERS += \
     clientwindow.h \
     common.h \
-    logwidget.h
+    logwidget.h \
+    mysqldb.h
 
 FORMS += \
     clientwindow.ui \

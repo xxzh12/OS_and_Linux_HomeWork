@@ -8,6 +8,7 @@
 #include <QTcpSocket>
 #include <QHostAddress>
 #include "logwidget.h"
+#include "mysqldb.h"
 
 namespace Ui {
 class ClientWindow;

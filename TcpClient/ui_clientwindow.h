@@ -45,15 +45,17 @@ public:
     QToolButton *italicTbtn;
     QToolButton *underlineTBtn;
     QToolButton *colorTBtn;
+    QToolButton *FileTBtn;
     QToolButton *clearTBtn;
     QTextEdit *msgTextEdit;
     QSplitter *splitter;
     QTextBrowser *textBrowser;
-    QWidget *widget;
+    QWidget *layoutWidget;
     QHBoxLayout *horizontalLayout_2;
     QPushButton *pushButton;
     QLabel *label;
     QPushButton *exitButton;
+    QLabel *Plabel;
     QMenuBar *menubar;
     QMenu *menuClient;
     QStatusBar *statusbar;
@@ -123,6 +125,11 @@ public:
 
         horizontalLayout->addWidget(colorTBtn);
 
+        FileTBtn = new QToolButton(frame);
+        FileTBtn->setObjectName(QString::fromUtf8("FileTBtn"));
+
+        horizontalLayout->addWidget(FileTBtn);
+
         clearTBtn = new QToolButton(frame);
         clearTBtn->setObjectName(QString::fromUtf8("clearTBtn"));
 
@@ -137,30 +144,40 @@ public:
         splitter->setOrientation(Qt::Horizontal);
         textBrowser = new QTextBrowser(splitter);
         textBrowser->setObjectName(QString::fromUtf8("textBrowser"));
+        textBrowser->setStyleSheet(QString::fromUtf8("image: url(:/new/prefix1/Images/Naruto.jpg);"));
         splitter->addWidget(textBrowser);
-        widget = new QWidget(centralwidget);
-        widget->setObjectName(QString::fromUtf8("widget"));
-        widget->setGeometry(QRect(20, 460, 602, 30));
-        horizontalLayout_2 = new QHBoxLayout(widget);
+        layoutWidget = new QWidget(centralwidget);
+        layoutWidget->setObjectName(QString::fromUtf8("layoutWidget"));
+        layoutWidget->setGeometry(QRect(20, 460, 602, 30));
+        horizontalLayout_2 = new QHBoxLayout(layoutWidget);
         horizontalLayout_2->setSpacing(81);
         horizontalLayout_2->setObjectName(QString::fromUtf8("horizontalLayout_2"));
         horizontalLayout_2->setContentsMargins(81, 0, 81, 0);
-        pushButton = new QPushButton(widget);
+        pushButton = new QPushButton(layoutWidget);
         pushButton->setObjectName(QString::fromUtf8("pushButton"));
 
         horizontalLayout_2->addWidget(pushButton);
 
-        label = new QLabel(widget);
+        label = new QLabel(layoutWidget);
         label->setObjectName(QString::fromUtf8("label"));
 
         horizontalLayout_2->addWidget(label);
 
-        exitButton = new QPushButton(widget);
+        exitButton = new QPushButton(layoutWidget);
         exitButton->setObjectName(QString::fromUtf8("exitButton"));
 
         horizontalLayout_2->addWidget(exitButton);
 
+        Plabel = new QLabel(centralwidget);
+        Plabel->setObjectName(QString::fromUtf8("Plabel"));
+        Plabel->setGeometry(QRect(0, -160, 731, 770));
         ClientWindow->setCentralWidget(centralwidget);
+        Plabel->raise();
+        tableWidget->raise();
+        frame->raise();
+        msgTextEdit->raise();
+        splitter->raise();
+        layoutWidget->raise();
         menubar = new QMenuBar(ClientWindow);
         menubar->setObjectName(QString::fromUtf8("menubar"));
         menubar->setGeometry(QRect(0, 0, 761, 28));
@@ -211,6 +228,7 @@ public:
         colorTBtn->setToolTip(QCoreApplication::translate("ClientWindow", "Colour", nullptr));
 #endif // QT_CONFIG(tooltip)
         colorTBtn->setText(QCoreApplication::translate("ClientWindow", "Col", nullptr));
+        FileTBtn->setText(QCoreApplication::translate("ClientWindow", "F", nullptr));
 #if QT_CONFIG(tooltip)
         clearTBtn->setToolTip(QCoreApplication::translate("ClientWindow", "Clear", nullptr));
 #endif // QT_CONFIG(tooltip)
@@ -218,6 +236,7 @@ public:
         pushButton->setText(QCoreApplication::translate("ClientWindow", "send", nullptr));
         label->setText(QCoreApplication::translate("ClientWindow", " Member Online:", nullptr));
         exitButton->setText(QCoreApplication::translate("ClientWindow", "exit", nullptr));
+        Plabel->setText(QString());
         menuClient->setTitle(QCoreApplication::translate("ClientWindow", "Client", nullptr));
     } // retranslateUi
 

@@ -157,6 +157,13 @@
       </widget>
      </item>
      <item>
+      <widget class="QToolButton" name="FileTBtn">
+       <property name="text">
+        <string>F</string>
+       </property>
+      </widget>
+     </item>
+     <item>
       <widget class="QToolButton" name="clearTBtn">
        <property name="toolTip">
         <string>Clear</string>
@@ -190,9 +197,13 @@
     <property name="orientation">
      <enum>Qt::Horizontal</enum>
     </property>
-    <widget class="QTextBrowser" name="textBrowser"/>
+    <widget class="QTextBrowser" name="textBrowser">
+     <property name="styleSheet">
+      <string notr="true">image: url(:/new/prefix1/Images/Naruto.jpg);</string>
+     </property>
+    </widget>
    </widget>
-   <widget class="QWidget" name="">
+   <widget class="QWidget" name="layoutWidget">
     <property name="geometry">
      <rect>
       <x>20</x>
@@ -237,6 +248,25 @@
      </item>
     </layout>
    </widget>
+   <widget class="QLabel" name="Plabel">
+    <property name="geometry">
+     <rect>
+      <x>0</x>
+      <y>-160</y>
+      <width>731</width>
+      <height>770</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
+   <zorder>Plabel</zorder>
+   <zorder>tableWidget</zorder>
+   <zorder>frame</zorder>
+   <zorder>msgTextEdit</zorder>
+   <zorder>splitter</zorder>
+   <zorder>layoutWidget</zorder>
   </widget>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">
