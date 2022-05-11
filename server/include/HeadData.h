@@ -20,6 +20,8 @@ private:
 public:
     HeadData(int fd);
 
+    HeadData();
+
     bool parse(const char *buffer);
 
     unsigned int getProtocolId();

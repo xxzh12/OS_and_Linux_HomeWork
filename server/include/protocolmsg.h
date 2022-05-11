@@ -8,4 +8,5 @@
 #define SEND 2
 #define TEXT 1
 #define IMAGE 2
+#define ONLINE_LIST 8
 

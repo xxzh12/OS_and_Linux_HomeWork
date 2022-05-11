@@ -9,6 +9,8 @@
 #include<sys/epoll.h>
 #include<arpa/inet.h>
 #include<protocolmsg.h>
+#include <netinet/ip.h>
+#include <netinet/tcp.h>
 
 #ifndef MAX_CONNECTIONS 
 #define MAX_CONNECTIONS 100

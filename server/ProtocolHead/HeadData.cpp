@@ -24,10 +24,14 @@ HeadData::HeadData(int fd) {
     baseParse();
 }
 
-/*bool HeadData::parse(const char *buffer) {
+HeadData::HeadData() {
+
+}
+
+bool HeadData::parse(const char *buffer) {
     bp = buffer;
     baseParse();
-}*/
+}
 
 unsigned int HeadData::getProtocolId() {
     return this->protocolId;

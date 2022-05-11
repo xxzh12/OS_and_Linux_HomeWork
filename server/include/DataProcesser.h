@@ -11,7 +11,7 @@ class DataProcesser {
 private:
     char buffer[TCP_BUFSIZE];
 
-    //int checkSocketConnected(int sock);
+    int checkSocketConnected(int sock);
 
 public:
     DataProcesser();
@@ -20,13 +20,15 @@ public:
 
     //string readImageContent(int fd, unsigned int dataLength);
 
-    void writeText(int fd, string text);
+    void writeText(int fd, unsigned int account, string text, unsigned int protocolId);
 
     //void writeImage(int fd, unsigned int account, const string &imagePath);
 
     //void writeMsg(int fd, string text);
 
-    void writeTextToAllUser(const vector<int> &fds, string text);
+    void writeTextToAllUser(const vector<int> &fds, unsigned int account, string text, unsigned int protocolId);
+
+    void writeOnline_UserToAllUser(const vector<int> &fds, unsigned int account, string text, unsigned int protocolId = ONLINE_LIST);
 
     //void writeImageToAllUser(const vector<int> &fds, int account, const string &imagePath);
 

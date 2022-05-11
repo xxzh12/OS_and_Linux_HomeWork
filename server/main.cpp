@@ -41,9 +41,7 @@ int main()
     Online online;
     while (true){
         //等待事件的产生，返回的是产生的事件数
-        //cout << "yes" << endl;
         int nready = epoll_wait(epfd, events, MAX_CONNECTIONS, -1);
-        //cout << "no" << endl;
         if (nready < 0) {
             cout << "epoll_wait error" << endl;
             exit(-1);
@@ -70,25 +68,27 @@ int main()
                 unsigned int account = hd.getAccount();
                 unsigned int dataType = hd.getDataType();
                 unsigned int dataLength = hd.getDataLength();
-                cout << protocolId << " " << account <<" "<< dataType <<" "<< dataLength <<" "<< endl;
+                cout << "protocol_head=" << protocolId << " " << account <<" "<< dataType <<" "<< dataLength <<" "<< endl;
                 DataProcesser dp;
                 switch (protocolId) {
                     case LOGIN:
                     {
                         string username = dp.readTextContent(fd, dataLength);
                         online.appendUser(fd, account, username);
-                        string Loginmessage = "(" + username + " login)";
+                        string Loginmessage = username + " login";
                         cout << Loginmessage << endl;
-                        dp.writeTextToAllUser(online.getAllReadFd(), Loginmessage);
+                        dp.writeOnline_UserToAllUser(online.getAllReadFd(), account, online.getUserList());
+                        dp.writeTextToAllUser(online.getAllReadFd(), account, Loginmessage, protocolId = LOGIN);
                     }
                         break;
                     case SEND:
                     {
+                        //if (dataType)
                         string message = dp.readTextContent(fd, dataLength);
                         string baseMsg = online.getUserName(account) + "(" + to_string(account) + "):";
                         cout << baseMsg + message <<endl;
                         if (dataType == TEXT) {
-                            dp.writeTextToAllUser(online.getAllReadFd(), baseMsg + message);
+                            dp.writeTextToAllUser(online.getAllReadFd(), account, baseMsg + message, protocolId = SEND);
                         }
                         cout << message << endl;
                     }
@@ -96,17 +96,19 @@ int main()
                     case LOGOUT:
                     {
                         string username = online.getUserName(account);
-                        string Logoutmessage = "(" + username + "logout)";
+                        string Logoutmessage = username + " logout";
                         cout << Logoutmessage << endl;
-                        dp.writeTextToAllUser(online.getAllReadFd(), Logoutmessage);
+                        dp.writeTextToAllUser(online.getAllReadFd(), account, Logoutmessage, protocolId = LOGOUT);
                         //cout << "size" << online.getAllReadFd().size() << endl;
-                        online.removeUser(fd);
+                        online.removeUser(fd, account);
+                        dp.writeOnline_UserToAllUser(online.getAllReadFd(), account, online.getUserList());
                         ev.data.fd = fd;
                         ev.events = EPOLLIN;
                         epoll_ctl(epfd, EPOLL_CTL_DEL, fd, &ev);
                         close(fd);
                     }
                         break;
+
                 }
             }
         }
