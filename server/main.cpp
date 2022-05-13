@@ -85,10 +85,15 @@ int main()
                     {
                         //if (dataType)
                         string message = dp.readTextContent(fd, dataLength);
-                        string baseMsg = online.getUserName(account) + "(" + to_string(account) + "):";
-                        cout << baseMsg + message <<endl;
                         if (dataType == TEXT) {
+                            string baseMsg = online.getUserName(account) + "(" + to_string(account) + "):";
+                            cout << baseMsg + message <<endl;
                             dp.writeTextToAllUser(online.getAllReadFd(), account, baseMsg + message, protocolId = SEND);
+                        }
+                        if (dataType == IMAGE) {
+                            string baseMsg = online.getUserName(account) + " had post a IMAGE, please check it";
+                            dp.writeTextToAllUser(online.getAllReadFd(), account, baseMsg , protocolId = SEND);
+                            dp.sendImageSignalToAllUser(online.getAllReadFd(), account, string("no"));
                         }
                         cout << message << endl;
                     }

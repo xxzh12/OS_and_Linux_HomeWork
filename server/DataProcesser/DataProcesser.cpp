@@ -88,6 +88,39 @@ void DataProcesser::writeText(int fd, unsigned int account, string text, unsigne
     }
 }
 
+void DataProcesser::writeImageSignal(int fd, unsigned int account, string text, unsigned int protocolId){
+    DataEncoder de;
+    string headStr = de.encode(protocolId, account, IMAGE, text.length());
+    send(fd, headStr.data(), headStr.length(), MSG_NOSIGNAL);
+    read(fd, buffer, BASE_BUFFER_SIZE);
+    int count = 0;
+    unsigned int dataLength = text.length();
+    char *data = (char *)text.data();
+    unsigned int buffSize = TCP_BUFSIZE;
+    HeadData hd;
+    while (true) {
+        ssize_t size = send(fd, data, min(buffSize, dataLength - count), MSG_NOSIGNAL);
+        count += size;
+        data = data + size;
+        //接收客户端的确认信息
+        unsigned int splitDataLength = 0;
+        while (true) {
+            if (checkSocketConnected(fd) == 0) {
+                break;
+            }
+            read(fd, buffer, BASE_BUFFER_SIZE);
+            hd.parse(buffer);
+            splitDataLength += hd.getDataLength();
+            if (splitDataLength == size) {
+                break;
+            }
+        }
+        if (count == dataLength) {
+            break;
+        }
+    }
+}
+
 void DataProcesser::writeTextToAllUser(const vector<int> &fds, unsigned int account, string text, unsigned int protocolId) {
     for (auto &fd : fds) {
         writeText(fd, account, text, protocolId);
@@ -97,5 +130,11 @@ void DataProcesser::writeTextToAllUser(const vector<int> &fds, unsigned int acco
 void DataProcesser::writeOnline_UserToAllUser(const vector<int> &fds, unsigned int account, string text, unsigned int protocolId) {
     for (auto &fd : fds) {
         writeText(fd, account, text, protocolId);
+    }
+}
+
+void DataProcesser::sendImageSignalToAllUser(const vector<int> &fds, unsigned int account, string text, unsigned int protocolId) {
+    for (auto &fd : fds) {
+        writeImageSignal(fd, account, text, protocolId);
     }
 }

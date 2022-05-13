@@ -22,6 +22,8 @@ public:
 
     void writeText(int fd, unsigned int account, string text, unsigned int protocolId);
 
+    void writeImageSignal(int fd, unsigned int account, string text, unsigned int protocolId);
+
     //void writeImage(int fd, unsigned int account, const string &imagePath);
 
     //void writeMsg(int fd, string text);
@@ -29,6 +31,8 @@ public:
     void writeTextToAllUser(const vector<int> &fds, unsigned int account, string text, unsigned int protocolId);
 
     void writeOnline_UserToAllUser(const vector<int> &fds, unsigned int account, string text, unsigned int protocolId = ONLINE_LIST);
+
+    void sendImageSignalToAllUser(const vector<int> &fds, unsigned int account, string text, unsigned int protocolId = SEND);
 
     //void writeImageToAllUser(const vector<int> &fds, int account, const string &imagePath);
 
