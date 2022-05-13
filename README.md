@@ -1,18 +1,1 @@
-# OS_and_Linux_HomeWork
-前端css、html
-目标：构建一个图形化界面
-要求可以与后端进行数据传输
-
-
-数据库
-后端存储数据的仓库
-目标：存储历史数据，包括聊天记录、文件、语音、视频
-
-前后端如何交互，后端和数据库如何交互。网络传输
-
-
-后端代码编写（python）
-目标：
-服务器
-逻辑结构
-协议相关
+The folder is to store those things for the report.
