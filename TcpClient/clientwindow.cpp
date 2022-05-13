@@ -47,13 +47,21 @@ ClientWindow::ClientWindow(QWidget *parent) :
     // do SY things
     setAttribute(Qt::WA_DeleteOnClose);//设置关闭窗口是自动释放内存
     //this->setStyleSheet(QString("background-color:#FFFFF;"));//设置背景颜色为白色。和标题栏颜色一致。
-    //ui->Plabel->setPixmap(QPixmap("./Images/Naruto.jpg"));
+    // 开启背景设置
+    this->setAutoFillBackground(true);
+    // 创建调色板对象
+    QPalette p = this->palette();
+    // 加载图片
+    QPixmap pix(":/new/prefix1/Images/backgroud.jpg");
+    // 设置图片
+    p.setBrush(QPalette::Window, QBrush(pix));
+    this->setPalette(p);
+    //ui->Plabel->setPixmap(QPixmap("./Images/backgroud.jpg"));
     //setAttribute基本上控件都可以用
     ui->textBrowser->setAttribute(Qt::WA_TranslucentBackground,true);
     //窗体设置透明度
     //setWindowOpacity(0.7);
-
-    setWindowTitle("Qt简易聊天室");
+    setWindowTitle("[Killer Queen]杜王町聊天室");
     // do other things
     connect(ui->fontCbx,&QFontComboBox::currentFontChanged,[=](const QFont &font){
         ui->msgTextEdit->setFontFamily(font.toString());
@@ -68,18 +76,38 @@ ClientWindow::ClientWindow(QWidget *parent) :
         if(checked)
         {
             ui->msgTextEdit->setFontWeight(QFont::Bold);
+            ui->boldTBtn->setStyleSheet("color: red");
         }
         else{
             ui->msgTextEdit->setFontWeight(QFont::Normal);
+            ui->boldTBtn->setStyleSheet("color: white");
         }
     });
     connect(ui->italicTbtn,&QToolButton::clicked,[=](bool checked){
-        ui->msgTextEdit->setFontItalic(checked);
-        ui->msgTextEdit->setFocus();
+        if(checked)
+        {
+            ui->msgTextEdit->setFontItalic(checked);
+            ui->msgTextEdit->setFocus();
+            ui->italicTbtn->setStyleSheet("color: red");
+        }
+        else{
+            ui->msgTextEdit->setFontItalic(checked);
+            ui->msgTextEdit->setFocus();
+            ui->italicTbtn->setStyleSheet("color: white");
+        }
     });
     connect(ui->underlineTBtn,&QToolButton::clicked,[=](bool checked){
-        ui->msgTextEdit->setFontUnderline(checked);
-        ui->msgTextEdit->setFocus();
+        if(checked)
+        {
+            ui->msgTextEdit->setFontUnderline(checked);
+            ui->msgTextEdit->setFocus();
+            ui->underlineTBtn->setStyleSheet("color: red");
+        }
+        else{
+            ui->msgTextEdit->setFontUnderline(checked);
+            ui->msgTextEdit->setFocus();
+            ui->underlineTBtn->setStyleSheet("color: white");
+        }
     });
     connect(ui->clearTBtn,&QToolButton::clicked,[=](){
         ui->textBrowser->clear();
@@ -91,14 +119,22 @@ ClientWindow::ClientWindow(QWidget *parent) :
     connect(ui->FileTBtn,&QToolButton::clicked,[=](){
         QString FileName;
         FileName=QFileDialog::getOpenFileName(this, tr("文件选取"), "", tr("Images (*.png *.xpm *.jpg);;Text files (*.txt);;XML files (*.xml)"));
-        qDebug() << FileName;
+        //qDebug() << FileName;
         MYsqldb DataBase;
         QSqlDatabase db;
         QDateTime time;
         QString strBuffer;
         time = QDateTime::currentDateTime();
         strBuffer = time.toString("yyyy-MM-dd hh:mm:ss");
-        DataBase.inportpt(db,"trial1",m_log->m_username,strBuffer,2,FileName);
+        DataBase.importfl(db,"trial1",m_log->m_username,strBuffer,2,FileName);
+
+        //send image signal
+        QString message = "NoMessage";
+        std::string st = message.toStdString();
+        char* MM = (char *)st.c_str();
+        char* str = encode(MM, SEND, (unsigned int)m_log->m_password.toInt(), IMAGE, (unsigned int)message.length());
+        m_socket->write(str, strlen(MM)+8);    // Exception
+        free(str);
     });
     connect(ui->exitButton,&QPushButton::clicked,[=](){
         //cout << "www" << endl;
@@ -106,7 +142,8 @@ ClientWindow::ClientWindow(QWidget *parent) :
         m_socket->write(str, 8);    // Exception
         MYsqldb DataBase;
         QString LogOutMsg;
-        LogOutMsg = QString::fromLocal8Bit(str, 8);
+        // LogOutMsg = QString::fromLocal8Bit(str, 8);
+        LogOutMsg ="logout";
         DataBase.IntegratedSendMsg(m_log->m_username, LogOutMsg);
         //cout << "sss" << endl;
         m_socket->waitForBytesWritten();
@@ -124,14 +161,83 @@ ClientWindow::ClientWindow(QWidget *parent) :
        QDateTime time;
        time = QDateTime::currentDateTime();
        strBuffer = time.toString("yyyy-MM-dd hh:mm:ss dddd");
+      // qDebug() << "text";
+       ui->textBrowser->setTextColor(Qt::blue);
+       ui->textBrowser->setCurrentFont(QFont("Times New Roman",12));
+       ui->textBrowser->append(strBuffer);
+       ui->textBrowser->setText(ui->textBrowser->toHtml() + str);
+    });
+    connect(rd, &ReadClient::onlineDisplayAble,[=](){
+       ui->MemberBrowser->clear();
+       QString content = QString::fromStdString(rd->content);
+       // ui->textBrowser->setText(ui->textBrowser->toPlainText() + "\n" + content);
+
+       QString str = content;
+       QString user;
+       QString head="Username:";
+       ui->MemberBrowser->setTextColor(Qt::black);
+       ui->MemberBrowser->setCurrentFont(QFont("Microsoft YaHei",10));
+       ui->MemberBrowser->append(head);
+       int n=0;
+       while((user=str.section(",",n,n)).isEmpty()==false)
+       {
+          n++;
+          ui->MemberBrowser->setCurrentFont(QFont("Microsoft YaHei",10));
+          ui->MemberBrowser->append(user);
+       }
+       ui->label->setText("Member Online :" + QString::number(n));
+    });
+    connect(rd, &ReadClient::loginDisplayAble,[=](){
+       QString content = QString::fromStdString(rd->content);
+       // ui->textBrowser->setText(ui->textBrowser->toPlainText() + "\n" + content);
+
+       QString str = content;
+       QString strBuffer;
+       QDateTime time;
+       time = QDateTime::currentDateTime();
+       strBuffer = time.toString("yyyy-MM-dd hh:mm:ss dddd");
+       ui->textBrowser->setTextColor(Qt::blue);
+       ui->textBrowser->setCurrentFont(QFont("Times New Roman",12));
+       ui->textBrowser->append(strBuffer);
+       ui->textBrowser->setTextColor(QColor(106,0,95));
+       ui->textBrowser->setCurrentFont(QFont("KaiTi",12));
+       ui->textBrowser->append(str);
+
+    });
+    connect(rd, &ReadClient::logoutDisplayAble,[=](){
+       QString content = QString::fromStdString(rd->content);
+       // ui->textBrowser->setText(ui->textBrowser->toPlainText() + "\n" + content);
+
+       QString str = content;
+       QString strBuffer;
+       QDateTime time;
+       time = QDateTime::currentDateTime();
+       strBuffer = time.toString("yyyy-MM-dd hh:mm:ss dddd");
        //qDebug() << str;
-       ui->textBrowser->setText(ui->textBrowser->toPlainText() +'\n'+strBuffer);
-       ui->textBrowser->setText(ui->textBrowser->toPlainText() + str+ '\n');
+       ui->textBrowser->setTextColor(Qt::blue);
+       ui->textBrowser->setCurrentFont(QFont("Times New Roman",12));
+       ui->textBrowser->append(strBuffer);
+       ui->textBrowser->setTextColor(QColor(169,169,169));
+       ui->textBrowser->setCurrentFont(QFont("KaiTi",12));
+       ui->textBrowser->append(str);
+    });
+
+    connect(rd, &ReadClient::imageDownload,[=](){
+        // qDebug() << "image message";
+        // QString content = QString::fromStdString(rd->content);
+        // QString str = content;
+        // ui->textBrowser->append(str);
+        MYsqldb DataBase;
+        DataBase.IntegratedGetMsg();
     });
 }
 
 void ClientWindow::slot_sendloginmessage()
 {
+    QString x = "欢迎来到杜王町，";
+    QString y = "!";
+    ui->Hellolabel->setText(x + m_log->m_username + y);
+
     MYsqldb DataBase;
     QString EncodedMessage;
     QStringList HistoryMsgList;
@@ -152,15 +258,25 @@ void ClientWindow::slot_sendloginmessage()
     HistoryMsgList = DataBase.IntegratedGetMsg();
     ListLength = HistoryMsgList.count();
     int i;
+    QString TimeString;
+    ui->textBrowser->setTextColor(QColor(218,165,32));
+    ui->textBrowser->setCurrentFont(QFont("Times New Roman",12));
     for(i = 0; i < ListLength / SQL_PERIOD; i++){
+        TimeString=HistoryMsgList.at(4*i+TIME_COUNT);
+        TimeString.replace(QString("T"),QString(" "));
+        TimeString.remove(".000");
+        ui->textBrowser->setText(ui->textBrowser->toPlainText() + TimeString + ' ');
         ui->textBrowser->setText(ui->textBrowser->toPlainText() + HistoryMsgList.at(4*i+USER_COUNT) + ' ');
-        ui->textBrowser->setText(ui->textBrowser->toPlainText() + HistoryMsgList.at(4*i+TIME_COUNT)+ ' ');
         //ui->textBrowser->setText(ui->textBrowser->toPlainText() + HistoryMsgList.at(4*i+TYPE_COUNT)+ ' ');
         ui->textBrowser->setText(ui->textBrowser->toPlainText() + HistoryMsgList.at(4*i+MESSAGE_COUNT) +'\n');
     }
 
-    EncodedMessage = QString::fromLocal8Bit(str, m_log->m_username.length()+8);
-    DataBase.IntegratedSendMsg(m_log->m_username, EncodedMessage);
+    QString LogIn = " login";
+    // std::string msg = st + LogIn;
+    //QString Msg = m_log->m_username + LogIn;
+    //qDebug() << "Here is the login msg to SQL: " << Msg;
+    // EncodedMessage = QString::fromLocal8Bit(str, m_log->m_username.length()+8);
+    DataBase.IntegratedSendMsg(m_log->m_username, LogIn);
     //qDebug() << "Send Encoded Login Message" << EncodedMessage;
 
 }
@@ -192,16 +308,16 @@ void ClientWindow::slot_readMessage()   // 只会在socket接收到server消息�
 void ClientWindow::slot_btnSendMsg()
 {
     MYsqldb DataBase;
-    QString message = ui->msgTextEdit->toPlainText();
-    //QString message = ui->msgTextEdit->toHtml() ;
+    QString messagetosql = ui->msgTextEdit->toPlainText();
+    QString message = ui->msgTextEdit->toHtml() ;
     std::string st = message.toStdString();
     char* MM = (char *)st.c_str();
     char* str = encode(MM, SEND, (unsigned int)m_log->m_password.toInt(), TEXT, (unsigned int)message.length());
     m_socket->write(str, strlen(MM)+8);    // Exception
     // send encoded message("message") to SQL database
-    message = QString::fromLocal8Bit(str, message.length()+8);
-    DataBase.IntegratedSendMsg(m_log->m_username, message);
-    qDebug() << message;
+    //message = QString::fromLocal8Bit(str, message.length()+8);
+    DataBase.IntegratedSendMsg(m_log->m_username, messagetosql);
+    qDebug() << messagetosql;
     ui->msgTextEdit->clear();
     free(str);
 }

@@ -22,8 +22,8 @@ QT_BEGIN_MOC_NAMESPACE
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_ReadClient_t {
-    QByteArrayData data[3];
-    char stringdata0[28];
+    QByteArrayData data[7];
+    char stringdata0[95];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -34,10 +34,16 @@ static const qt_meta_stringdata_ReadClient_t qt_meta_stringdata_ReadClient = {
     {
 QT_MOC_LITERAL(0, 0, 10), // "ReadClient"
 QT_MOC_LITERAL(1, 11, 15), // "textDisplayAble"
-QT_MOC_LITERAL(2, 27, 0) // ""
+QT_MOC_LITERAL(2, 27, 0), // ""
+QT_MOC_LITERAL(3, 28, 17), // "onlineDisplayAble"
+QT_MOC_LITERAL(4, 46, 16), // "loginDisplayAble"
+QT_MOC_LITERAL(5, 63, 17), // "logoutDisplayAble"
+QT_MOC_LITERAL(6, 81, 13) // "imageDownload"
 
     },
-    "ReadClient\0textDisplayAble\0"
+    "ReadClient\0textDisplayAble\0\0"
+    "onlineDisplayAble\0loginDisplayAble\0"
+    "logoutDisplayAble\0imageDownload"
 };
 #undef QT_MOC_LITERAL
 
@@ -47,17 +53,25 @@ static const uint qt_meta_data_ReadClient[] = {
        8,       // revision
        0,       // classname
        0,    0, // classinfo
-       1,   14, // methods
+       5,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
        0,       // flags
-       1,       // signalCount
+       5,       // signalCount
 
  // signals: name, argc, parameters, tag, flags
-       1,    0,   19,    2, 0x06 /* Public */,
+       1,    0,   39,    2, 0x06 /* Public */,
+       3,    0,   40,    2, 0x06 /* Public */,
+       4,    0,   41,    2, 0x06 /* Public */,
+       5,    0,   42,    2, 0x06 /* Public */,
+       6,    0,   43,    2, 0x06 /* Public */,
 
  // signals: parameters
+    QMetaType::Void,
+    QMetaType::Void,
+    QMetaType::Void,
+    QMetaType::Void,
     QMetaType::Void,
 
        0        // eod
@@ -70,6 +84,10 @@ void ReadClient::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, 
         Q_UNUSED(_t)
         switch (_id) {
         case 0: _t->textDisplayAble(); break;
+        case 1: _t->onlineDisplayAble(); break;
+        case 2: _t->loginDisplayAble(); break;
+        case 3: _t->logoutDisplayAble(); break;
+        case 4: _t->imageDownload(); break;
         default: ;
         }
     } else if (_c == QMetaObject::IndexOfMethod) {
@@ -78,6 +96,34 @@ void ReadClient::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, 
             using _t = void (ReadClient::*)();
             if (*reinterpret_cast<_t *>(_a[1]) == static_cast<_t>(&ReadClient::textDisplayAble)) {
                 *result = 0;
+                return;
+            }
+        }
+        {
+            using _t = void (ReadClient::*)();
+            if (*reinterpret_cast<_t *>(_a[1]) == static_cast<_t>(&ReadClient::onlineDisplayAble)) {
+                *result = 1;
+                return;
+            }
+        }
+        {
+            using _t = void (ReadClient::*)();
+            if (*reinterpret_cast<_t *>(_a[1]) == static_cast<_t>(&ReadClient::loginDisplayAble)) {
+                *result = 2;
+                return;
+            }
+        }
+        {
+            using _t = void (ReadClient::*)();
+            if (*reinterpret_cast<_t *>(_a[1]) == static_cast<_t>(&ReadClient::logoutDisplayAble)) {
+                *result = 3;
+                return;
+            }
+        }
+        {
+            using _t = void (ReadClient::*)();
+            if (*reinterpret_cast<_t *>(_a[1]) == static_cast<_t>(&ReadClient::imageDownload)) {
+                *result = 4;
                 return;
             }
         }
@@ -114,13 +160,13 @@ int ReadClient::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 1)
+        if (_id < 5)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 1;
+        _id -= 5;
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 1)
+        if (_id < 5)
             *reinterpret_cast<int*>(_a[0]) = -1;
-        _id -= 1;
+        _id -= 5;
     }
     return _id;
 }
@@ -129,6 +175,30 @@ int ReadClient::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
 void ReadClient::textDisplayAble()
 {
     QMetaObject::activate(this, &staticMetaObject, 0, nullptr);
+}
+
+// SIGNAL 1
+void ReadClient::onlineDisplayAble()
+{
+    QMetaObject::activate(this, &staticMetaObject, 1, nullptr);
+}
+
+// SIGNAL 2
+void ReadClient::loginDisplayAble()
+{
+    QMetaObject::activate(this, &staticMetaObject, 2, nullptr);
+}
+
+// SIGNAL 3
+void ReadClient::logoutDisplayAble()
+{
+    QMetaObject::activate(this, &staticMetaObject, 3, nullptr);
+}
+
+// SIGNAL 4
+void ReadClient::imageDownload()
+{
+    QMetaObject::activate(this, &staticMetaObject, 4, nullptr);
 }
 QT_WARNING_POP
 QT_END_MOC_NAMESPACE

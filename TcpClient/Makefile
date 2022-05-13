@@ -779,7 +779,9 @@ compiler_rcc_clean:
 qrc_res.cpp: res.qrc \
 		../Qt5.14.2/5.14.2/gcc_64/bin/rcc \
 		Images/Chats.png \
-		Images/Naruto.jpg
+		Images/Naruto.jpg \
+		Images/login.jpg \
+		Images/backgroud.jpg
 	/home/klein/Qt5.14.2/5.14.2/gcc_64/bin/rcc -name res res.qrc -o qrc_res.cpp
 
 compiler_moc_predefs_make_all: moc_predefs.h
@@ -942,10 +944,25 @@ moc_clientwindow.cpp: clientwindow.h \
 		../Qt5.14.2/5.14.2/gcc_64/include/QtNetwork/qtnetwork-config.h \
 		../Qt5.14.2/5.14.2/gcc_64/include/QtNetwork/qabstractsocket.h \
 		../Qt5.14.2/5.14.2/gcc_64/include/QtCore/QtAlgorithms \
+		../Qt5.14.2/5.14.2/gcc_64/include/QtGui/QPixmap \
+		../Qt5.14.2/5.14.2/gcc_64/include/QtWidgets/QFileDialog \
+		../Qt5.14.2/5.14.2/gcc_64/include/QtWidgets/qfiledialog.h \
+		../Qt5.14.2/5.14.2/gcc_64/include/QtCore/qdir.h \
+		../Qt5.14.2/5.14.2/gcc_64/include/QtCore/qfileinfo.h \
+		../Qt5.14.2/5.14.2/gcc_64/include/QtCore/QThread \
+		../Qt5.14.2/5.14.2/gcc_64/include/QtCore/qthread.h \
 		readclient.h \
 		dataparser.h \
 		logwidget.h \
 		mysqldb.h \
+		../Qt5.14.2/5.14.2/gcc_64/include/QtCore/QDir \
+		../Qt5.14.2/5.14.2/gcc_64/include/QtGui/QImage \
+		../Qt5.14.2/5.14.2/gcc_64/include/QtGui/QImageWriter \
+		../Qt5.14.2/5.14.2/gcc_64/include/QtGui/qimagewriter.h \
+		../Qt5.14.2/5.14.2/gcc_64/include/QtGui/qimageiohandler.h \
+		../Qt5.14.2/5.14.2/gcc_64/include/QtCore/qplugin.h \
+		../Qt5.14.2/5.14.2/gcc_64/include/QtCore/qpointer.h \
+		../Qt5.14.2/5.14.2/gcc_64/include/QtCore/qfactoryinterface.h \
 		moc_predefs.h \
 		../Qt5.14.2/5.14.2/gcc_64/bin/moc
 	/home/klein/Qt5.14.2/5.14.2/gcc_64/bin/moc $(DEFINES) --include /home/klein/TcpClient/moc_predefs.h -I/home/klein/Qt5.14.2/5.14.2/gcc_64/mkspecs/linux-g++ -I/home/klein/TcpClient -I/home/klein/Qt5.14.2/5.14.2/gcc_64/include -I/home/klein/Qt5.14.2/5.14.2/gcc_64/include/QtWidgets -I/home/klein/Qt5.14.2/5.14.2/gcc_64/include/QtGui -I/home/klein/Qt5.14.2/5.14.2/gcc_64/include/QtSql -I/home/klein/Qt5.14.2/5.14.2/gcc_64/include/QtNetwork -I/home/klein/Qt5.14.2/5.14.2/gcc_64/include/QtCore -I/usr/include/c++/9 -I/usr/include/x86_64-linux-gnu/c++/9 -I/usr/include/c++/9/backward -I/usr/lib/gcc/x86_64-linux-gnu/9/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include clientwindow.h -o moc_clientwindow.cpp
@@ -1222,6 +1239,13 @@ moc_readclient.cpp: readclient.h \
 		../Qt5.14.2/5.14.2/gcc_64/include/QtNetwork/qtnetwork-config.h \
 		../Qt5.14.2/5.14.2/gcc_64/include/QtNetwork/qabstractsocket.h \
 		../Qt5.14.2/5.14.2/gcc_64/include/QtCore/QtAlgorithms \
+		../Qt5.14.2/5.14.2/gcc_64/include/QtGui/QPixmap \
+		../Qt5.14.2/5.14.2/gcc_64/include/QtWidgets/QFileDialog \
+		../Qt5.14.2/5.14.2/gcc_64/include/QtWidgets/qfiledialog.h \
+		../Qt5.14.2/5.14.2/gcc_64/include/QtCore/qdir.h \
+		../Qt5.14.2/5.14.2/gcc_64/include/QtCore/qfileinfo.h \
+		../Qt5.14.2/5.14.2/gcc_64/include/QtCore/QThread \
+		../Qt5.14.2/5.14.2/gcc_64/include/QtCore/qthread.h \
 		moc_predefs.h \
 		../Qt5.14.2/5.14.2/gcc_64/bin/moc
 	/home/klein/Qt5.14.2/5.14.2/gcc_64/bin/moc $(DEFINES) --include /home/klein/TcpClient/moc_predefs.h -I/home/klein/Qt5.14.2/5.14.2/gcc_64/mkspecs/linux-g++ -I/home/klein/TcpClient -I/home/klein/Qt5.14.2/5.14.2/gcc_64/include -I/home/klein/Qt5.14.2/5.14.2/gcc_64/include/QtWidgets -I/home/klein/Qt5.14.2/5.14.2/gcc_64/include/QtGui -I/home/klein/Qt5.14.2/5.14.2/gcc_64/include/QtSql -I/home/klein/Qt5.14.2/5.14.2/gcc_64/include/QtNetwork -I/home/klein/Qt5.14.2/5.14.2/gcc_64/include/QtCore -I/usr/include/c++/9 -I/usr/include/x86_64-linux-gnu/c++/9 -I/usr/include/c++/9/backward -I/usr/lib/gcc/x86_64-linux-gnu/9/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include readclient.h -o moc_readclient.cpp
@@ -1402,10 +1426,25 @@ clientwindow.o: clientwindow.cpp clientwindow.h \
 		../Qt5.14.2/5.14.2/gcc_64/include/QtNetwork/qtnetwork-config.h \
 		../Qt5.14.2/5.14.2/gcc_64/include/QtNetwork/qabstractsocket.h \
 		../Qt5.14.2/5.14.2/gcc_64/include/QtCore/QtAlgorithms \
+		../Qt5.14.2/5.14.2/gcc_64/include/QtGui/QPixmap \
+		../Qt5.14.2/5.14.2/gcc_64/include/QtWidgets/QFileDialog \
+		../Qt5.14.2/5.14.2/gcc_64/include/QtWidgets/qfiledialog.h \
+		../Qt5.14.2/5.14.2/gcc_64/include/QtCore/qdir.h \
+		../Qt5.14.2/5.14.2/gcc_64/include/QtCore/qfileinfo.h \
+		../Qt5.14.2/5.14.2/gcc_64/include/QtCore/QThread \
+		../Qt5.14.2/5.14.2/gcc_64/include/QtCore/qthread.h \
 		readclient.h \
 		dataparser.h \
 		logwidget.h \
 		mysqldb.h \
+		../Qt5.14.2/5.14.2/gcc_64/include/QtCore/QDir \
+		../Qt5.14.2/5.14.2/gcc_64/include/QtGui/QImage \
+		../Qt5.14.2/5.14.2/gcc_64/include/QtGui/QImageWriter \
+		../Qt5.14.2/5.14.2/gcc_64/include/QtGui/qimagewriter.h \
+		../Qt5.14.2/5.14.2/gcc_64/include/QtGui/qimageiohandler.h \
+		../Qt5.14.2/5.14.2/gcc_64/include/QtCore/qplugin.h \
+		../Qt5.14.2/5.14.2/gcc_64/include/QtCore/qpointer.h \
+		../Qt5.14.2/5.14.2/gcc_64/include/QtCore/qfactoryinterface.h \
 		ui_clientwindow.h \
 		../Qt5.14.2/5.14.2/gcc_64/include/QtCore/QVariant \
 		../Qt5.14.2/5.14.2/gcc_64/include/QtWidgets/QAction \
@@ -1439,11 +1478,6 @@ clientwindow.o: clientwindow.cpp clientwindow.h \
 		../Qt5.14.2/5.14.2/gcc_64/include/QtWidgets/qlayout.h \
 		../Qt5.14.2/5.14.2/gcc_64/include/QtWidgets/qlayoutitem.h \
 		../Qt5.14.2/5.14.2/gcc_64/include/QtWidgets/qgridlayout.h \
-		../Qt5.14.2/5.14.2/gcc_64/include/QtWidgets/QHeaderView \
-		../Qt5.14.2/5.14.2/gcc_64/include/QtWidgets/qheaderview.h \
-		../Qt5.14.2/5.14.2/gcc_64/include/QtWidgets/qabstractitemview.h \
-		../Qt5.14.2/5.14.2/gcc_64/include/QtWidgets/qabstractscrollarea.h \
-		../Qt5.14.2/5.14.2/gcc_64/include/QtCore/qitemselectionmodel.h \
 		../Qt5.14.2/5.14.2/gcc_64/include/QtWidgets/QLabel \
 		../Qt5.14.2/5.14.2/gcc_64/include/QtWidgets/qlabel.h \
 		../Qt5.14.2/5.14.2/gcc_64/include/QtWidgets/QMenu \
@@ -1453,16 +1487,13 @@ clientwindow.o: clientwindow.cpp clientwindow.h \
 		../Qt5.14.2/5.14.2/gcc_64/include/QtWidgets/QPushButton \
 		../Qt5.14.2/5.14.2/gcc_64/include/QtWidgets/qpushbutton.h \
 		../Qt5.14.2/5.14.2/gcc_64/include/QtWidgets/qabstractbutton.h \
-		../Qt5.14.2/5.14.2/gcc_64/include/QtWidgets/QSplitter \
-		../Qt5.14.2/5.14.2/gcc_64/include/QtWidgets/qsplitter.h \
+		../Qt5.14.2/5.14.2/gcc_64/include/QtWidgets/QSpacerItem \
 		../Qt5.14.2/5.14.2/gcc_64/include/QtWidgets/QStatusBar \
 		../Qt5.14.2/5.14.2/gcc_64/include/QtWidgets/qstatusbar.h \
-		../Qt5.14.2/5.14.2/gcc_64/include/QtWidgets/QTableWidget \
-		../Qt5.14.2/5.14.2/gcc_64/include/QtWidgets/qtablewidget.h \
-		../Qt5.14.2/5.14.2/gcc_64/include/QtWidgets/qtableview.h \
 		../Qt5.14.2/5.14.2/gcc_64/include/QtWidgets/QTextBrowser \
 		../Qt5.14.2/5.14.2/gcc_64/include/QtWidgets/qtextbrowser.h \
 		../Qt5.14.2/5.14.2/gcc_64/include/QtWidgets/qtextedit.h \
+		../Qt5.14.2/5.14.2/gcc_64/include/QtWidgets/qabstractscrollarea.h \
 		../Qt5.14.2/5.14.2/gcc_64/include/QtGui/qtextdocument.h \
 		../Qt5.14.2/5.14.2/gcc_64/include/QtGui/qtextoption.h \
 		../Qt5.14.2/5.14.2/gcc_64/include/QtGui/qtextcursor.h \
@@ -1470,14 +1501,7 @@ clientwindow.o: clientwindow.cpp clientwindow.h \
 		../Qt5.14.2/5.14.2/gcc_64/include/QtGui/qpen.h \
 		../Qt5.14.2/5.14.2/gcc_64/include/QtWidgets/QTextEdit \
 		../Qt5.14.2/5.14.2/gcc_64/include/QtWidgets/QToolButton \
-		../Qt5.14.2/5.14.2/gcc_64/include/QtWidgets/qtoolbutton.h \
-		../Qt5.14.2/5.14.2/gcc_64/include/QtCore/QThread \
-		../Qt5.14.2/5.14.2/gcc_64/include/QtCore/qthread.h \
-		../Qt5.14.2/5.14.2/gcc_64/include/QtGui/QPixmap \
-		../Qt5.14.2/5.14.2/gcc_64/include/QtWidgets/QFileDialog \
-		../Qt5.14.2/5.14.2/gcc_64/include/QtWidgets/qfiledialog.h \
-		../Qt5.14.2/5.14.2/gcc_64/include/QtCore/qdir.h \
-		../Qt5.14.2/5.14.2/gcc_64/include/QtCore/qfileinfo.h
+		../Qt5.14.2/5.14.2/gcc_64/include/QtWidgets/qtoolbutton.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o clientwindow.o clientwindow.cpp
 
 dataparser.o: dataparser.cpp dataparser.h \
@@ -1630,7 +1654,14 @@ dataparser.o: dataparser.cpp dataparser.h \
 		../Qt5.14.2/5.14.2/gcc_64/include/QtNetwork/qtnetworkglobal.h \
 		../Qt5.14.2/5.14.2/gcc_64/include/QtNetwork/qtnetwork-config.h \
 		../Qt5.14.2/5.14.2/gcc_64/include/QtNetwork/qabstractsocket.h \
-		../Qt5.14.2/5.14.2/gcc_64/include/QtCore/QtAlgorithms
+		../Qt5.14.2/5.14.2/gcc_64/include/QtCore/QtAlgorithms \
+		../Qt5.14.2/5.14.2/gcc_64/include/QtGui/QPixmap \
+		../Qt5.14.2/5.14.2/gcc_64/include/QtWidgets/QFileDialog \
+		../Qt5.14.2/5.14.2/gcc_64/include/QtWidgets/qfiledialog.h \
+		../Qt5.14.2/5.14.2/gcc_64/include/QtCore/qdir.h \
+		../Qt5.14.2/5.14.2/gcc_64/include/QtCore/qfileinfo.h \
+		../Qt5.14.2/5.14.2/gcc_64/include/QtCore/QThread \
+		../Qt5.14.2/5.14.2/gcc_64/include/QtCore/qthread.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o dataparser.o dataparser.cpp
 
 logwidget.o: logwidget.cpp logwidget.h \
@@ -1758,10 +1789,6 @@ logwidget.o: logwidget.cpp logwidget.h \
 		../Qt5.14.2/5.14.2/gcc_64/include/QtWidgets/qdesktopwidget.h \
 		../Qt5.14.2/5.14.2/gcc_64/include/QtGui/qguiapplication.h \
 		../Qt5.14.2/5.14.2/gcc_64/include/QtGui/qinputmethod.h \
-		../Qt5.14.2/5.14.2/gcc_64/include/QtWidgets/QCheckBox \
-		../Qt5.14.2/5.14.2/gcc_64/include/QtWidgets/qcheckbox.h \
-		../Qt5.14.2/5.14.2/gcc_64/include/QtWidgets/qabstractbutton.h \
-		../Qt5.14.2/5.14.2/gcc_64/include/QtGui/qicon.h \
 		../Qt5.14.2/5.14.2/gcc_64/include/QtWidgets/QGroupBox \
 		../Qt5.14.2/5.14.2/gcc_64/include/QtWidgets/qgroupbox.h \
 		../Qt5.14.2/5.14.2/gcc_64/include/QtWidgets/qframe.h \
@@ -1775,6 +1802,8 @@ logwidget.o: logwidget.cpp logwidget.h \
 		../Qt5.14.2/5.14.2/gcc_64/include/QtGui/qtextoption.h \
 		../Qt5.14.2/5.14.2/gcc_64/include/QtWidgets/QPushButton \
 		../Qt5.14.2/5.14.2/gcc_64/include/QtWidgets/qpushbutton.h \
+		../Qt5.14.2/5.14.2/gcc_64/include/QtWidgets/qabstractbutton.h \
+		../Qt5.14.2/5.14.2/gcc_64/include/QtGui/qicon.h \
 		../Qt5.14.2/5.14.2/gcc_64/include/QtGui/QIcon
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o logwidget.o logwidget.cpp
 
@@ -1929,10 +1958,25 @@ main.o: main.cpp clientwindow.h \
 		../Qt5.14.2/5.14.2/gcc_64/include/QtNetwork/qtnetwork-config.h \
 		../Qt5.14.2/5.14.2/gcc_64/include/QtNetwork/qabstractsocket.h \
 		../Qt5.14.2/5.14.2/gcc_64/include/QtCore/QtAlgorithms \
+		../Qt5.14.2/5.14.2/gcc_64/include/QtGui/QPixmap \
+		../Qt5.14.2/5.14.2/gcc_64/include/QtWidgets/QFileDialog \
+		../Qt5.14.2/5.14.2/gcc_64/include/QtWidgets/qfiledialog.h \
+		../Qt5.14.2/5.14.2/gcc_64/include/QtCore/qdir.h \
+		../Qt5.14.2/5.14.2/gcc_64/include/QtCore/qfileinfo.h \
+		../Qt5.14.2/5.14.2/gcc_64/include/QtCore/QThread \
+		../Qt5.14.2/5.14.2/gcc_64/include/QtCore/qthread.h \
 		readclient.h \
 		dataparser.h \
 		logwidget.h \
 		mysqldb.h \
+		../Qt5.14.2/5.14.2/gcc_64/include/QtCore/QDir \
+		../Qt5.14.2/5.14.2/gcc_64/include/QtGui/QImage \
+		../Qt5.14.2/5.14.2/gcc_64/include/QtGui/QImageWriter \
+		../Qt5.14.2/5.14.2/gcc_64/include/QtGui/qimagewriter.h \
+		../Qt5.14.2/5.14.2/gcc_64/include/QtGui/qimageiohandler.h \
+		../Qt5.14.2/5.14.2/gcc_64/include/QtCore/qplugin.h \
+		../Qt5.14.2/5.14.2/gcc_64/include/QtCore/qpointer.h \
+		../Qt5.14.2/5.14.2/gcc_64/include/QtCore/qfactoryinterface.h \
 		../Qt5.14.2/5.14.2/gcc_64/include/QtWidgets/QApplication \
 		../Qt5.14.2/5.14.2/gcc_64/include/QtWidgets/qapplication.h \
 		../Qt5.14.2/5.14.2/gcc_64/include/QtWidgets/qdesktopwidget.h \
@@ -2065,7 +2109,20 @@ mysqldb.o: mysqldb.cpp mysqldb.h \
 		../Qt5.14.2/5.14.2/gcc_64/include/QtCore/QStringList \
 		../Qt5.14.2/5.14.2/gcc_64/include/QtCore/QStringListIterator \
 		../Qt5.14.2/5.14.2/gcc_64/include/QtCore/QByteArray \
-		../Qt5.14.2/5.14.2/gcc_64/include/QtCore/QFile
+		../Qt5.14.2/5.14.2/gcc_64/include/QtCore/QFile \
+		../Qt5.14.2/5.14.2/gcc_64/include/QtCore/QDir \
+		../Qt5.14.2/5.14.2/gcc_64/include/QtCore/qdir.h \
+		../Qt5.14.2/5.14.2/gcc_64/include/QtCore/qfileinfo.h \
+		../Qt5.14.2/5.14.2/gcc_64/include/QtGui/QImage \
+		../Qt5.14.2/5.14.2/gcc_64/include/QtGui/QImageWriter \
+		../Qt5.14.2/5.14.2/gcc_64/include/QtGui/qimagewriter.h \
+		../Qt5.14.2/5.14.2/gcc_64/include/QtGui/qimageiohandler.h \
+		../Qt5.14.2/5.14.2/gcc_64/include/QtCore/qplugin.h \
+		../Qt5.14.2/5.14.2/gcc_64/include/QtCore/qpointer.h \
+		../Qt5.14.2/5.14.2/gcc_64/include/QtCore/qjsonobject.h \
+		../Qt5.14.2/5.14.2/gcc_64/include/QtCore/qjsonvalue.h \
+		../Qt5.14.2/5.14.2/gcc_64/include/QtCore/qfactoryinterface.h \
+		../Qt5.14.2/5.14.2/gcc_64/include/QtGui/QPixmap
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o mysqldb.o mysqldb.cpp
 
 readclient.o: readclient.cpp readclient.h \
@@ -2219,7 +2276,14 @@ readclient.o: readclient.cpp readclient.h \
 		../Qt5.14.2/5.14.2/gcc_64/include/QtNetwork/qtnetworkglobal.h \
 		../Qt5.14.2/5.14.2/gcc_64/include/QtNetwork/qtnetwork-config.h \
 		../Qt5.14.2/5.14.2/gcc_64/include/QtNetwork/qabstractsocket.h \
-		../Qt5.14.2/5.14.2/gcc_64/include/QtCore/QtAlgorithms
+		../Qt5.14.2/5.14.2/gcc_64/include/QtCore/QtAlgorithms \
+		../Qt5.14.2/5.14.2/gcc_64/include/QtGui/QPixmap \
+		../Qt5.14.2/5.14.2/gcc_64/include/QtWidgets/QFileDialog \
+		../Qt5.14.2/5.14.2/gcc_64/include/QtWidgets/qfiledialog.h \
+		../Qt5.14.2/5.14.2/gcc_64/include/QtCore/qdir.h \
+		../Qt5.14.2/5.14.2/gcc_64/include/QtCore/qfileinfo.h \
+		../Qt5.14.2/5.14.2/gcc_64/include/QtCore/QThread \
+		../Qt5.14.2/5.14.2/gcc_64/include/QtCore/qthread.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o readclient.o readclient.cpp
 
 qrc_res.o: qrc_res.cpp 

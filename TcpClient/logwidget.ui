@@ -16,11 +16,26 @@
   <widget class="QPushButton" name="btn_clear">
    <property name="geometry">
     <rect>
-     <x>20</x>
-     <y>230</y>
-     <width>89</width>
-     <height>25</height>
+     <x>50</x>
+     <y>190</y>
+     <width>112</width>
+     <height>32</height>
     </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QPushButton {
+    color:#ffffff; /*文字颜色*/
+    background-color:qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop:0 #ff55ff, stop: 1 #1296db);/*背景色*/
+    border-style:outset; /*边框风格*/
+    border-width:2px;/*边框宽度*/
+    border-color:#0055ff; /*边框颜色*/
+    border-radius:10px; /*边框倒角*/
+    font:bold 14px; /*字体*/
+    font-family: Segoe UI;
+    min-width:100px;/*控件最小宽度*/
+    min-height:20px;/*控件最小高度*/
+    padding:4px;/*内边距*/
+}</string>
    </property>
    <property name="text">
     <string>Reset</string>
@@ -29,40 +44,29 @@
   <widget class="QPushButton" name="btn_log">
    <property name="geometry">
     <rect>
-     <x>270</x>
-     <y>230</y>
-     <width>89</width>
-     <height>25</height>
+     <x>220</x>
+     <y>190</y>
+     <width>112</width>
+     <height>32</height>
     </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QPushButton {
+    color:#ffffff; /*文字颜色*/
+    background-color:qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop:0 #ff55ff, stop: 1 #1296db);/*背景色*/
+    border-style:outset; /*边框风格*/
+    border-width:2px;/*边框宽度*/
+    border-color:#0055ff; /*边框颜色*/
+    border-radius:10px; /*边框倒角*/
+    font:bold 14px; /*字体*/
+    font-family: Segoe UI;
+    min-width:100px;/*控件最小宽度*/
+    min-height:20px;/*控件最小高度*/
+    padding:4px;/*内边距*/
+}</string>
    </property>
    <property name="text">
     <string>Login</string>
-   </property>
-  </widget>
-  <widget class="QCheckBox" name="check_pw">
-   <property name="geometry">
-    <rect>
-     <x>20</x>
-     <y>200</y>
-     <width>151</width>
-     <height>23</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>remember name</string>
-   </property>
-  </widget>
-  <widget class="QCheckBox" name="check_name">
-   <property name="geometry">
-    <rect>
-     <x>230</x>
-     <y>200</y>
-     <width>151</width>
-     <height>23</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>remember pw</string>
    </property>
   </widget>
   <widget class="QGroupBox" name="groupBox">
@@ -75,7 +79,7 @@
     </rect>
    </property>
    <property name="title">
-    <string>Login Page</string>
+    <string/>
    </property>
    <widget class="QLineEdit" name="edit_name">
     <property name="geometry">
@@ -83,8 +87,17 @@
       <x>80</x>
       <y>30</y>
       <width>251</width>
-      <height>25</height>
+      <height>31</height>
      </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QLineEdit {
+    border-style:outset; /*边框风格*/
+    border-width:2px;/*边框宽度*/
+    border-color:#0055ff; /*边框颜色*/
+    border-radius:10px; /*边框倒角*/
+    padding:4px;/*内边距*/
+}</string>
     </property>
    </widget>
    <widget class="QLineEdit" name="edit_pw">
@@ -93,48 +106,81 @@
       <x>80</x>
       <y>80</y>
       <width>251</width>
-      <height>25</height>
+      <height>31</height>
      </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QLineEdit {
+    border-style:outset; /*边框风格*/
+    border-width:2px;/*边框宽度*/
+    border-color:#0055ff; /*边框颜色*/
+    border-radius:10px; /*边框倒角*/
+    padding:4px;/*内边距*/
+}</string>
     </property>
    </widget>
    <widget class="QLabel" name="label_name">
     <property name="geometry">
      <rect>
-      <x>10</x>
-      <y>40</y>
-      <width>67</width>
-      <height>17</height>
+      <x>30</x>
+      <y>25</y>
+      <width>112</width>
+      <height>32</height>
      </rect>
     </property>
+    <property name="styleSheet">
+     <string notr="true">QLabel {
+    font:bold 14px; /*字体*/
+    font-family: Segoe UI;
+    min-width:50px;/*控件最小宽度*/
+    min-height:20px;/*控件最小高度*/
+}</string>
+    </property>
     <property name="text">
-     <string>Name:</string>
+     <string> Name:</string>
     </property>
    </widget>
    <widget class="QLabel" name="label_pw">
     <property name="geometry">
      <rect>
-      <x>0</x>
+      <x>16</x>
       <y>80</y>
       <width>67</width>
-      <height>17</height>
+      <height>20</height>
      </rect>
     </property>
+    <property name="styleSheet">
+     <string notr="true">QLabel {
+    font:bold 14px; /*字体*/
+    font-family: Segoe UI;
+    min-width:50px;/*控件最小宽度*/
+    min-height:20px;/*控件最小高度*/
+}</string>
+    </property>
     <property name="text">
-     <string>Password:</string>
+     <string> Account:</string>
     </property>
    </widget>
   </widget>
   <widget class="QLabel" name="label_title">
    <property name="geometry">
     <rect>
-     <x>150</x>
-     <y>0</y>
-     <width>81</width>
-     <height>17</height>
+     <x>100</x>
+     <y>10</y>
+     <width>191</width>
+     <height>20</height>
     </rect>
    </property>
+   <property name="styleSheet">
+    <string notr="true">QLabel {
+    font:bold 14px; /*字体*/
+    font-family: Segoe UI;
+    min-width:50px;/*控件最小宽度*/
+    min-height:20px;/*控件最小高度*/
+}</string>
+   </property>
    <property name="text">
-    <string>Vchatroom </string>
+    <string>[Killer Queen]杜王町聊天室</string>
    </property>
   </widget>
  </widget>

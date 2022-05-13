@@ -6,29 +6,17 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>761</width>
-    <height>544</height>
+    <width>748</width>
+    <height>595</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>MainWindow</string>
   </property>
+  <property name="styleSheet">
+   <string notr="true"/>
+  </property>
   <widget class="QWidget" name="centralwidget">
-   <widget class="QTableWidget" name="tableWidget">
-    <property name="geometry">
-     <rect>
-      <x>620</x>
-      <y>0</y>
-      <width>120</width>
-      <height>450</height>
-     </rect>
-    </property>
-    <column>
-     <property name="text">
-      <string>Username:</string>
-     </property>
-    </column>
-   </widget>
    <widget class="QFrame" name="frame">
     <property name="geometry">
      <rect>
@@ -38,8 +26,18 @@
       <height>50</height>
      </rect>
     </property>
+    <property name="styleSheet">
+     <string notr="true"> border-width: 1px;
+    padding: 1px;
+    border-style: solid;
+    border-color: darkkhaki;
+    border-radius: 5px;</string>
+    </property>
     <property name="frameShape">
      <enum>QFrame::Box</enum>
+    </property>
+    <property name="lineWidth">
+     <number>2</number>
     </property>
     <layout class="QHBoxLayout" name="horizontalLayout">
      <item>
@@ -109,6 +107,9 @@
        <property name="toolTip">
         <string>Bold</string>
        </property>
+       <property name="styleSheet">
+        <string notr="true">color:#ffffff; /*文字颜色*/</string>
+       </property>
        <property name="text">
         <string>B</string>
        </property>
@@ -121,6 +122,9 @@
       <widget class="QToolButton" name="italicTbtn">
        <property name="toolTip">
         <string>Incline</string>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">color:#ffffff; /*文字颜色*/</string>
        </property>
        <property name="text">
         <string>I</string>
@@ -135,6 +139,9 @@
        <property name="toolTip">
         <string>Underline</string>
        </property>
+       <property name="styleSheet">
+        <string notr="true">color:#ffffff; /*文字颜色*/</string>
+       </property>
        <property name="text">
         <string>U</string>
        </property>
@@ -148,6 +155,9 @@
        <property name="toolTip">
         <string>Colour</string>
        </property>
+       <property name="styleSheet">
+        <string notr="true">color:#ffffff; /*文字颜色*/</string>
+       </property>
        <property name="text">
         <string>Col</string>
        </property>
@@ -158,6 +168,9 @@
      </item>
      <item>
       <widget class="QToolButton" name="FileTBtn">
+       <property name="styleSheet">
+        <string notr="true">color:#ffffff; /*文字颜色*/</string>
+       </property>
        <property name="text">
         <string>F</string>
        </property>
@@ -168,12 +181,23 @@
        <property name="toolTip">
         <string>Clear</string>
        </property>
+       <property name="styleSheet">
+        <string notr="true">color:#ffffff; /*文字颜色*/</string>
+       </property>
        <property name="text">
         <string>C</string>
        </property>
       </widget>
      </item>
     </layout>
+    <zorder>fontCbx</zorder>
+    <zorder>sizeCbx</zorder>
+    <zorder>italicTbtn</zorder>
+    <zorder>underlineTBtn</zorder>
+    <zorder>colorTBtn</zorder>
+    <zorder>FileTBtn</zorder>
+    <zorder>clearTBtn</zorder>
+    <zorder>boldTBtn</zorder>
    </widget>
    <widget class="QTextEdit" name="msgTextEdit">
     <property name="geometry">
@@ -184,32 +208,21 @@
       <height>100</height>
      </rect>
     </property>
-   </widget>
-   <widget class="QSplitter" name="splitter">
-    <property name="geometry">
-     <rect>
-      <x>20</x>
-      <y>0</y>
-      <width>600</width>
-      <height>300</height>
-     </rect>
+    <property name="styleSheet">
+     <string notr="true"> border-width: 1px;
+    padding: 1px;
+    border-style: solid;
+    border-color: darkkhaki;
+    border-radius: 5px;</string>
     </property>
-    <property name="orientation">
-     <enum>Qt::Horizontal</enum>
-    </property>
-    <widget class="QTextBrowser" name="textBrowser">
-     <property name="styleSheet">
-      <string notr="true">image: url(:/new/prefix1/Images/Naruto.jpg);</string>
-     </property>
-    </widget>
    </widget>
    <widget class="QWidget" name="layoutWidget">
     <property name="geometry">
      <rect>
       <x>20</x>
-      <y>460</y>
-      <width>602</width>
-      <height>30</height>
+      <y>450</y>
+      <width>711</width>
+      <height>61</height>
      </rect>
     </property>
     <layout class="QHBoxLayout" name="horizontalLayout_2">
@@ -227,13 +240,32 @@
      </property>
      <item>
       <widget class="QPushButton" name="pushButton">
+       <property name="styleSheet">
+        <string notr="true">QPushButton {
+    color:#ffffff; /*文字颜色*/
+    background-color:qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop:0 #ff55ff, stop: 1 #1296db);/*背景色*/
+    border-style:outset; /*边框风格*/
+    border-width:2px;/*边框宽度*/
+    border-color:#0055ff; /*边框颜色*/
+    border-radius:10px; /*边框倒角*/
+    font:bold 14px; /*字体*/
+    font-family: Segoe UI;
+    min-width:100px;/*控件最小宽度*/
+    min-height:20px;/*控件最小高度*/
+    padding:4px;/*内边距*/
+}</string>
+       </property>
        <property name="text">
-        <string>send</string>
+        <string>发送</string>
        </property>
       </widget>
      </item>
      <item>
       <widget class="QLabel" name="label">
+       <property name="styleSheet">
+        <string notr="true">font: 75 11pt &quot;Ubuntu Condensed&quot;;
+color:#ffffff; /*文字颜色*/</string>
+       </property>
        <property name="text">
         <string> Member Online:</string>
        </property>
@@ -241,39 +273,175 @@
      </item>
      <item>
       <widget class="QPushButton" name="exitButton">
+       <property name="styleSheet">
+        <string notr="true">QPushButton {
+    color:#ffffff; /*文字颜色*/
+    border-style:outset; /*边框风格*/
+    border-width:2px;/*边框宽度*/
+    border-color:#0055ff; /*边框颜色*/
+    border-radius:10px; /*边框倒角*/
+    font:bold 14px; /*字体*/
+    font-family: Segoe UI;
+    min-width:100px;/*控件最小宽度*/
+    min-height:20px;/*控件最小高度*/
+    padding:4px;/*内边距*/
+}</string>
+       </property>
        <property name="text">
-        <string>exit</string>
+        <string>退出</string>
        </property>
       </widget>
      </item>
     </layout>
+    <zorder>label</zorder>
+    <zorder>exitButton</zorder>
+    <zorder>pushButton</zorder>
    </widget>
-   <widget class="QLabel" name="Plabel">
+   <widget class="QTextBrowser" name="MemberBrowser">
     <property name="geometry">
      <rect>
-      <x>0</x>
-      <y>-160</y>
-      <width>731</width>
-      <height>770</height>
+      <x>620</x>
+      <y>0</y>
+      <width>111</width>
+      <height>451</height>
      </rect>
     </property>
-    <property name="text">
-     <string/>
+    <property name="styleSheet">
+     <string notr="true"/>
+    </property>
+    <property name="frameShape">
+     <enum>QFrame::HLine</enum>
+    </property>
+    <property name="frameShadow">
+     <enum>QFrame::Sunken</enum>
     </property>
    </widget>
-   <zorder>Plabel</zorder>
-   <zorder>tableWidget</zorder>
-   <zorder>frame</zorder>
-   <zorder>msgTextEdit</zorder>
-   <zorder>splitter</zorder>
-   <zorder>layoutWidget</zorder>
+   <widget class="QTextBrowser" name="textBrowser">
+    <property name="geometry">
+     <rect>
+      <x>21</x>
+      <y>1</y>
+      <width>599</width>
+      <height>299</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true"/>
+    </property>
+   </widget>
+   <widget class="QFrame" name="frame_2">
+    <property name="geometry">
+     <rect>
+      <x>20</x>
+      <y>0</y>
+      <width>601</width>
+      <height>301</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true"> border-width: 1px;
+    padding: 1px;
+    border-style: solid;
+    border-color: darkkhaki;
+    border-radius: 5px;</string>
+    </property>
+    <property name="frameShape">
+     <enum>QFrame::StyledPanel</enum>
+    </property>
+    <property name="frameShadow">
+     <enum>QFrame::Raised</enum>
+    </property>
+    <property name="lineWidth">
+     <number>2</number>
+    </property>
+   </widget>
+   <widget class="QFrame" name="frame_3">
+    <property name="geometry">
+     <rect>
+      <x>620</x>
+      <y>0</y>
+      <width>111</width>
+      <height>451</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true"> border-width: 1px;
+    padding: 1px;
+    border-style: solid;
+    border-color: darkkhaki;
+    border-radius: 5px;</string>
+    </property>
+    <property name="frameShape">
+     <enum>QFrame::StyledPanel</enum>
+    </property>
+    <property name="frameShadow">
+     <enum>QFrame::Raised</enum>
+    </property>
+    <property name="lineWidth">
+     <number>2</number>
+    </property>
+   </widget>
+   <widget class="QWidget" name="horizontalLayoutWidget">
+    <property name="geometry">
+     <rect>
+      <x>20</x>
+      <y>509</y>
+      <width>711</width>
+      <height>51</height>
+     </rect>
+    </property>
+    <layout class="QHBoxLayout" name="horizontalLayout_3">
+     <item>
+      <spacer name="horizontalSpacer">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>40</width>
+         <height>20</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+     <item>
+      <widget class="QLabel" name="Hellolabel">
+       <property name="styleSheet">
+        <string notr="true">QLabel {
+    font-family: &quot;KaiTI&quot;;
+    font-size: 17px;
+    color: #BDC8E2;
+}
+</string>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <spacer name="horizontalSpacer_2">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>40</width>
+         <height>20</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+    </layout>
+   </widget>
   </widget>
+  <widget class="QStatusBar" name="statusbar"/>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>761</width>
+     <width>748</width>
      <height>28</height>
     </rect>
    </property>
@@ -284,7 +452,6 @@
    </widget>
    <addaction name="menuClient"/>
   </widget>
-  <widget class="QStatusBar" name="statusbar"/>
  </widget>
  <resources/>
  <connections/>

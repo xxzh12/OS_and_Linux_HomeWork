@@ -47,15 +47,13 @@ bool ReadClient::readData()
     m_socket->write(ACK_PACKET.data(), ACK_PACKET.length());
     content = "";
     qDebug() << "----------数据长度-----------" << dataLength;
-    if(dataType == TEXT){
-        readTextContent();
-        return true;
-    }
+    readTextContent();
+    return true;
     /*else if(dataType == IMAGE){
         readImageContent();
         return true;
     }*/
-    return false;
+    //return false;
 }
 
 
@@ -78,9 +76,17 @@ void ReadClient::readTextContent()
         m_socket->write(SPLIT_ACK_PACKET.data(), SPLIT_ACK_PACKET.length());
         if(dataLength == 0){
             switch(protocolId){
-                case SEND: emit textDisplayAble();break;
+                case SEND:
+                    if (dataType == TEXT) emit textDisplayAble();
+                    if (dataType == IMAGE) {
+                        qDebug() << "IMAGE";
+                        emit imageDownload();
+                    }
+                    break;
             // case NOTICE:notice = content; emit noticeDisplayAble();break;
-            // case ONLINELIST: emit onlineDisplayAble();break;
+                case ONLINELIST: emit onlineDisplayAble();break;
+                case LOGIN: emit loginDisplayAble();break;
+                case LOGOUT: emit logoutDisplayAble();break;
             }
             break;
         }

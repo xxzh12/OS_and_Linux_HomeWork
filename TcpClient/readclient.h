@@ -51,7 +51,10 @@ signals:
     void textDisplayAble();
     //void imageDisplayAble();
     //void noticeDisplayAble();
-    //void onlineDisplayAble();
+    void onlineDisplayAble();
+    void loginDisplayAble();
+    void logoutDisplayAble();
+    void imageDownload();
 };
 
 #endif // READCLIENT_H

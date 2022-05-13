@@ -2,5 +2,7 @@
     <qresource prefix="/new/prefix1">
         <file>Images/Naruto.jpg</file>
         <file>Images/Chats.png</file>
+        <file>Images/backgroud.jpg</file>
+        <file>Images/login.jpg</file>
     </qresource>
 </RCC>
